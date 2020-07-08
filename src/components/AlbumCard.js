@@ -1,22 +1,31 @@
 /**  @jsx jsx  */
 import { jsx } from '@emotion/core';
+import mq from './MediaQuery';
 
 const AlbumCard = () => {
   return (
     <div
       css={{
-        width: '15rem',
+        width: '100%',
         cursor: 'pointer',
         fontSize: '0.8rem',
         borderRadius: '14px',
         display: 'inline-block',
         backgroundColor: '#192734',
+        [mq[1]]: {
+          width: '15rem',
+        },
       }}
     >
       <div
         css={{
           width: '100%',
-          height: '15rem',
+          height: '10rem',
+          backgroundSize: 'cover',
+          [mq[1]]: {
+            width: '100%',
+            height: '15rem',
+          },
           borderTopLeftRadius: '14px',
           borderTopRightRadius: '14px',
           backgroundRepeat: 'no-repeat',
@@ -46,12 +55,27 @@ const AlbumCard = () => {
         <div
           css={{
             color: '#80919e',
-            margin: '0.5rem 0',
+            margin: '0.5rem 0 0.3rem',
+            fontSize: '0.6rem',
+            [mq[1]]: {
+              margin: '0.5rem 0',
+              fontSize: 'inherit',
+            },
           }}
         >
           Alternative Rock / Hard Rock / Space Rock
         </div>
-        <div css={{ color: '#80919e' }}>Release Year: 2001 </div>
+        <div
+          css={{
+            color: '#80919e',
+            fontSize: '0.6rem',
+            [mq[1]]: {
+              fontSize: 'inherit',
+            },
+          }}
+        >
+          Release Year: 2001
+        </div>
       </div>
     </div>
   );

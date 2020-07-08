@@ -6,7 +6,8 @@ const SongList = () => {
   return (
     <div
       css={{
-        width: '50%',
+        minWidth: '50%',
+        maxWidth: '700px',
         padding: ' 0 1rem',
         borderRadius: '24px',
         border: '10px solid #192734',
