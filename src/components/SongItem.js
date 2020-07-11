@@ -1,7 +1,8 @@
 /**  @jsx jsx  */
 import { jsx } from '@emotion/core';
+import mq from './MediaQuery';
 
-const SongItem = () => {
+const SongItem = ({ name, duration, artist=[] }) => {
   return (
     <div
       css={{
@@ -37,13 +38,37 @@ const SongItem = () => {
             </g>
           </svg>
         </div>
-        <div css={{ marginLeft: '10px' }}>
-          <div>Citizen Erased</div>
-          <div css={{ fontSize: '0.8rem' }}>Muse</div>
+        <div
+          css={{
+            maxWidth: '200px',
+            marginLeft: '10px',
+            [mq[1]]: {
+              maxWidth: '300px',
+            },
+            [mq[2]]: {
+              maxWidth: '400px',
+            },
+          }}
+        >
+          <div
+            css={{
+              overflow: 'hidden',
+              whiteSpace: 'nowrap',
+              textOverflow: 'ellipsis',
+              textTransform: 'capitalize',
+            }}
+          >
+            {name}
+          </div>
+          <div css={{ fontSize: '0.8rem', textTransform: 'capitalize' }}>
+            {artist.map((a) => a.name).join(' / ')}
+          </div>
         </div>
       </div>
       <div css={{ display: 'flex', alignItems: 'center' }}>
-        <div>2:23</div>
+        <div>
+          <time>{duration}</time>
+        </div>
         <svg
           viewBox='0 0 24 20'
           css={{ fill: '#fff', margin: '-10px 0 0 10px', cursor: 'pointer' }}

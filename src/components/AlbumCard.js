@@ -1,11 +1,15 @@
 /**  @jsx jsx  */
 import { jsx } from '@emotion/core';
 import mq from './MediaQuery';
+import { Link } from 'react-router-dom';
 
-const AlbumCard = () => {
+const AlbumCard = ({ id, name, year, cover, artist, genre }) => {
+
   return (
-    <div
+    <Link
+      to={`album/${id}`}
       css={{
+        all: 'unset',
         width: '100%',
         cursor: 'pointer',
         fontSize: '0.8rem',
@@ -29,8 +33,7 @@ const AlbumCard = () => {
           borderTopLeftRadius: '14px',
           borderTopRightRadius: '14px',
           backgroundRepeat: 'no-repeat',
-          backgroundImage:
-            'url(https://cdn-39.myzcloud.me/img/69/673337/13015037.jpg)',
+          backgroundImage: `url(${cover})`,
         }}
       ></div>
       <div
@@ -41,29 +44,33 @@ const AlbumCard = () => {
         <div
           css={{
             marginBottom: '5px',
+            textTransform: 'capitalize',
           }}
         >
-          Muse
+          {artist.map(a => a.name).join(' / ')}
         </div>
         <div
           css={{
             fontSize: '1rem',
+            textTransform: 'capitalize'
           }}
         >
-          Origin of Symmetry
+          {name}
         </div>
         <div
           css={{
             color: '#80919e',
-            margin: '0.5rem 0 0.3rem',
             fontSize: '0.6rem',
+            margin: '0.5rem 0 0.3rem',
+            textTransform: 'capitalize',
+
             [mq[1]]: {
               margin: '0.5rem 0',
               fontSize: 'inherit',
             },
           }}
         >
-          Alternative Rock / Hard Rock / Space Rock
+           {genre.map(a => a.name).join(' / ')}
         </div>
         <div
           css={{
@@ -74,10 +81,10 @@ const AlbumCard = () => {
             },
           }}
         >
-          Release Year: 2001
+          Release Year: <time>{year}</time>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

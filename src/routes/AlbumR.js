@@ -1,8 +1,8 @@
 import React from 'react';
 import Album from '../pages/Album';
 
-const AlbumR = () => {
-  return <Album />;
+const AlbumR = (props) => {
+  return <Album {...props}/>;
 };
 
 export default AlbumR;

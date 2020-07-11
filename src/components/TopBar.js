@@ -14,7 +14,7 @@ const ClearFix = () => (
   </div>
 );
 
-const TopBar = ({ location: { pathname } }) => {
+const TopBar = ({ location: { pathname }, history }) => {
   return (
     <div
       css={{
@@ -33,6 +33,9 @@ const TopBar = ({ location: { pathname } }) => {
             '&:hover': {
               backgroundColor: 'rgba(29, 161, 242, 0.1)',
             },
+          }}
+          onClick={() => {
+            history.goBack();
           }}
         >
           <svg viewBox='0 0 24 24' fill='rgb(29, 161, 242)'>
