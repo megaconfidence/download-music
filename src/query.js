@@ -41,3 +41,20 @@ export const GET_ALBUM = gql`
     }
   }
 `;
+
+export const SEARCH = gql`
+  query Search($input: SearchInput!) {
+    searchSong(input: $input) {
+      id
+      name
+    }
+    searchAlbum(input: $input) {
+      id
+      name
+    }
+    searchArtist(input: $input) {
+      id
+      name
+    }
+  }
+`;

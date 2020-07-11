@@ -47,7 +47,7 @@ const TopBar = ({ location: { pathname }, history }) => {
       ) : (
         <ClearFix />
       )}
-      <SearchBar />
+      <SearchBar history={history} />
       <ClearFix />
     </div>
   );

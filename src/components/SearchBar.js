@@ -1,16 +1,64 @@
 /**  @jsx jsx  */
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { jsx } from '@emotion/core';
 import mq from './MediaQuery';
+import client from '../client';
+import { SEARCH } from '../query';
+import SearchResult from './SearchResult';
 
-const SearchBar = () => {
+const SearchBar = ({ history }) => {
   const inputElement = useRef(null);
   const focusColor = 'rgb(29, 161, 242)';
-  const [isFocused, setIsFocused] = useState(false);
+  const [result, setResult] = useState({});
   const [inputValue, setInputValue] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
+  const [isFocused, setIsFocused] = useState(false);
+
+  const resetSearch = () => {
+    setResult({});
+    setInputValue('');
+    setIsLoading(true);
+    setIsFocused(false);
+  };
+
+  const inputHandler = ({ target }) => {
+    setInputValue(target.value);
+
+    const duration = 500;
+    clearTimeout(target._timer);
+    target._timer = setTimeout(async () => {
+      try {
+        const { data, loading, error } = await client.query({
+          query: SEARCH,
+          variables: {
+            input: { query: target.value.toLowerCase(), limit: 3 },
+          },
+        });
+        if (loading) setIsLoading(true);
+        if (error) console.log(error);
+        setResult(data);
+        setIsLoading(false);
+      } catch (error) {
+        console.log(error);
+      }
+    }, duration);
+  };
+
+  useEffect(() => {
+    history.listen(() => {
+      resetSearch();
+    });
+  }, [history]);
 
   return (
     <div
+      tabIndex='1'
+      onFocus={() => {
+        setIsFocused(true);
+      }}
+      onBlur={() => {
+        setIsFocused(false);
+      }}
       css={{
         position: 'relative',
         alignItems: 'center',
@@ -18,7 +66,8 @@ const SearchBar = () => {
         display: 'inline-flex',
         borderRadius: '9999px',
         width: 'calc(100% - 0)',
-        // width: 'calc(100% - 50px)',
+        '&:focus': { outline: 'none' },
+        '$::-moz-focus-inner ': { border: '0' },
         justifyContent: 'space-between',
         [mq[1]]: {
           width: '30rem',
@@ -26,14 +75,13 @@ const SearchBar = () => {
         border: `2px solid ${isFocused ? focusColor : 'transparent'}`,
       }}
     >
-      <div css={{
-        display: 'flex',
-        alignItems: 'center'
-      }}>
+      <div
+        css={{
+          display: 'flex',
+          alignItems: 'center',
+        }}
+      >
         <svg
-          onClick={() => {
-            inputElement.current.focus();
-          }}
           viewBox='0 0 24 24'
           css={{ margin: '0 10px', fill: isFocused ? focusColor : '#a6a5a5' }}
         >
@@ -45,21 +93,12 @@ const SearchBar = () => {
           ref={inputElement}
           css={{
             color: '#fff',
-
             height: '3rem',
             border: 'unset',
             background: 'unset',
           }}
-          onFocus={() => {
-            setIsFocused(true);
-          }}
-          onBlur={() => {
-            setIsFocused(false);
-          }}
           value={inputValue}
-          onChange={({ target }) => {
-            setInputValue(target.value);
-          }}
+          onChange={inputHandler}
           type='text'
           placeholder='Search'
         />
@@ -76,6 +115,10 @@ const SearchBar = () => {
           backgroundColor: 'rgb(29, 161, 242)',
           visibility: isFocused ? 'visable' : 'hidden',
         }}
+        onClick={() => {
+          resetSearch();
+          inputElement.current.focus();
+        }}
       >
         <svg
           viewBox='0 0 15 15'
@@ -89,77 +132,8 @@ const SearchBar = () => {
           </g>
         </svg>
       </div>
-      <div
-        css={{
-          width: '100%',
-          bottom: '-5px',
-          position: 'absolute',
-          display: isFocused ? 'block' : 'none',
-        }}
-      >
-        <div
-          css={{
-            top: '0',
-            width: '100%',
-            position: 'absolute',
-            borderRadius: '14px',
-            backgroundColor: '#15202b',
-          }}
-        >
-          <ul
-            css={{
-              all: 'unset',
-              display: 'block',
-              li: {
-                all: 'unset',
-                padding: '1rem',
-                display: 'flex',
-                fontSize: '1rem',
-                cursor: 'pointer',
-                borderBottom: '1px solid #38444d',
 
-                '&:last-of-type': {
-                  borderBottom: 'none',
-                  borderBottomLeftRadius: '14px',
-                  borderBottomRightRadius: '14px',
-                },
-                '&:first-of-type': {
-                  borderTopLeftRadius: '14px',
-                  borderTopRightRadius: '14px',
-                },
-                '&:hover': {
-                  backgroundColor: 'rgba(255, 255, 255, 0.1)',
-                },
-
-                'div:last-child': {
-                  marginLeft: '1rem',
-                  fontSize: '0.7rem',
-                  borderRadius: '10px',
-                  padding: '0.2rem 0.3rem',
-                  backgroundColor: '#1da1f23b',
-                },
-              },
-            }}
-          >
-            <li>
-              <div>album result</div>
-              <div>album</div>
-            </li>
-            <li>
-              <div>song result</div>
-              <div>song</div>
-            </li>
-            <li>
-              <div>artist result</div>
-              <div>artist</div>
-            </li>
-            <li>
-              <div>genre result</div>
-              <div>genre</div>
-            </li>
-          </ul>
-        </div>
-      </div>
+      {!isLoading ? <SearchResult {...result} /> : null}
     </div>
   );
 };
