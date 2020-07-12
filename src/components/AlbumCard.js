@@ -7,7 +7,7 @@ const AlbumCard = ({ id, name, year, cover, artist, genre }) => {
 
   return (
     <Link
-      to={`album/${id}`}
+      to={`/album/${id}`}
       css={{
         all: 'unset',
         width: '100%',

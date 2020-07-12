@@ -13,8 +13,10 @@ const Album = ({ location: { pathname } }) => {
     },
   });
   if (loading) return null;
-  if (error) return <p css={{ fontSize: '1rem' }}>An error occured!</p>;
-
+  if (error) {
+    console.log(error)
+    return <p css={{ fontSize: '1rem' }}>An error occured!</p>;
+  }
   return (
     <div
       css={{

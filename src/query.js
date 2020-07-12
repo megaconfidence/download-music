@@ -18,6 +18,28 @@ export const GET_ALBUMS = gql`
   }
 `;
 
+export const GET_ARTIST = gql`
+  query GetArtist($id: ID!) {
+    artist(id: $id) {
+      id
+      name
+      album {
+        id
+        url
+        name
+        year
+        cover
+        artist {
+          name
+        }
+        genre {
+          name
+        }
+      }
+    }
+  }
+`;
+
 export const GET_ALBUM = gql`
   query GetAlbum($id: ID!) {
     album(id: $id) {
@@ -37,6 +59,34 @@ export const GET_ALBUM = gql`
         name
         playId
         duration
+      }
+    }
+  }
+`;
+
+export const GET_SONG = gql`
+  # Write your query or mutation here
+  query GetSong($id: ID!) {
+    song(id: $id) {
+      id
+      album {
+        id
+        url
+        name
+        year
+        cover
+        artist {
+          name
+        }
+        genre {
+          name
+        }
+        song {
+          id
+          name
+          playId
+          duration
+        }
       }
     }
   }

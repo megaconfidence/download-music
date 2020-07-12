@@ -6,6 +6,7 @@ import AlbumR from './routes/AlbumR';
 import TopBar from './components/TopBar';
 import SongR from './routes/SongR';
 import mq from './components/MediaQuery';
+import ArtistR from './routes/ArtistR';
 
 function App() {
   return (
@@ -24,13 +25,18 @@ function App() {
             <Route exact path='/' render={(props) => <HomeR {...props} />} />
             <Route
               exact
-              path='/song'
+              path='/song/:id'
               render={(props) => <SongR {...props} />}
             />
             <Route
               exact
               path='/album/:id'
               render={(props) => <AlbumR {...props} />}
+            />
+            <Route
+              exact
+              path='/artist/:id'
+              render={(props) => <ArtistR {...props} />}
             />
           </Switch>
         </div>

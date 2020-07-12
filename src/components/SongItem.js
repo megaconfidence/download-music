@@ -2,7 +2,7 @@
 import { jsx } from '@emotion/core';
 import mq from './MediaQuery';
 
-const SongItem = ({ name, duration, artist=[] }) => {
+const SongItem = ({ name, duration, artist = [], highlight=false }) => {
   return (
     <div
       css={{
@@ -13,11 +13,11 @@ const SongItem = ({ name, duration, artist=[] }) => {
         padding: '0 10px',
         borderRadius: '14px',
         alignItems: 'center',
-        backgroundColor: '#192734',
+        backgroundColor: `${highlight ? 'rgba(29, 161, 242, .85)' : '#192734'}`,
         justifyContent: 'space-between',
-
+        
         '&:hover': {
-          backgroundColor: 'rgba(255, 255, 255, 0.1)',
+          backgroundColor: `${highlight ? 'rgba(29, 161, 242, .65)' : 'rgba(255, 255, 255, 0.1)'}`,
         },
       }}
     >

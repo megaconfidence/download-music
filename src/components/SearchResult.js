@@ -75,7 +75,7 @@ const SearchResult = ({ searchAlbum=[], searchArtist=[], searchSong=[] }) => {
           ))}
 
           {searchArtist.map((a, k) => (
-            <Link to='#' key={k + a.name}>
+            <Link key={k + a.name} to={`/artist/${a.id}`}>
               <li>
                 <div>{a.name}</div>
                 <div>artist</div>
@@ -84,7 +84,7 @@ const SearchResult = ({ searchAlbum=[], searchArtist=[], searchSong=[] }) => {
           ))}
 
           {searchSong.map((s, k) => (
-            <Link to='#' key={k + s.name}>
+            <Link key={k + s.name} to={`/song/${s.id}`}>
               <li>
                 <div>{s.name}</div>
                 <div>song</div>

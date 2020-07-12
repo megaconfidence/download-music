@@ -1,37 +1,33 @@
 /**  @jsx jsx  */
 import { jsx } from '@emotion/core';
-import { GET_ALBUMS } from '../query';
+import { GET_ARTIST } from '../query';
 import mq from '../components/MediaQuery';
-import NextPage from '../components/NextPage';
 import { useQuery } from '@apollo/react-hooks';
 import AlbumCard from '../components/AlbumCard';
 
 const Home = ({ history, location: { pathname, search } }) => {
-  const page =
-    search && search.includes('page=')
-      ? Number(
-          search
-            .replace('?', '')
-            .split('&')
-            .filter((q) => q.includes('page='))
-            .join()
-            .replace('page=', '')
-        )
-      : 1;
-
-  const { data, loading, error } = useQuery(GET_ALBUMS, {
+  const { data, loading, error } = useQuery(GET_ARTIST, {
     variables: {
-      input: { page, limit: 8 },
+      id: pathname.replace('/artist/', ''),
     },
   });
 
   if (loading) return null;
   if (error) {
-    console.log(error);
+    console.log(error)
     return <p css={{ fontSize: '1rem' }}>An error occured!</p>;
   }
   return (
     <div>
+      <div
+        css={{
+          fontSize: '2rem',
+          marginBottom: '2rem',
+          textTransform: 'capitalize',
+        }}
+      >
+       albums by {data.artist.name}
+      </div>
       <div
         css={{
           display: 'grid',
@@ -43,11 +39,10 @@ const Home = ({ history, location: { pathname, search } }) => {
           },
         }}
       >
-        {data.albums.map((album, k) => (
+        {data.artist.album.map((album, k) => (
           <AlbumCard key={k} {...album} />
         ))}
       </div>
-      <NextPage {...history} />
     </div>
   );
 };
