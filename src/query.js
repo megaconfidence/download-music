@@ -56,10 +56,20 @@ export const GET_ALBUM = gql`
       }
       song {
         id
+        url
         name
         playId
         duration
       }
+    }
+  }
+`;
+
+export const GET_LINKS = gql`
+  query GetLinks($url: String!) {
+    songLinks(url: $url) {
+      url
+      playId
     }
   }
 `;

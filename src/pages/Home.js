@@ -5,6 +5,7 @@ import mq from '../components/MediaQuery';
 import NextPage from '../components/NextPage';
 import { useQuery } from '@apollo/react-hooks';
 import AlbumCard from '../components/AlbumCard';
+import Loading from '../components/Loading';
 
 const Home = ({ history, location: { pathname, search } }) => {
   const page =
@@ -25,7 +26,7 @@ const Home = ({ history, location: { pathname, search } }) => {
     },
   });
 
-  if (loading) return null;
+  if (loading) return <Loading />;
   if (error) {
     console.log(error);
     return <p css={{ fontSize: '1rem' }}>An error occured!</p>;

@@ -5,6 +5,7 @@ import AlbumInfo from '../components/AlbumInfo';
 import mq from '../components/MediaQuery';
 import { GET_SONG } from '../query';
 import { useQuery } from '@apollo/react-hooks';
+import Loading from '../components/Loading';
 
 const Song = ({ location: { pathname } }) => {
   const { data, loading, error } = useQuery(GET_SONG, {
@@ -12,7 +13,7 @@ const Song = ({ location: { pathname } }) => {
       id: pathname.replace('/song/', ''),
     },
   });
-  if (loading) return null;
+  if (loading) return <Loading />;
   if (error) {
     console.log(error)
     return <p css={{ fontSize: '1rem' }}>An error occured!</p>;

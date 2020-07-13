@@ -4,6 +4,7 @@ import { GET_ARTIST } from '../query';
 import mq from '../components/MediaQuery';
 import { useQuery } from '@apollo/react-hooks';
 import AlbumCard from '../components/AlbumCard';
+import Loading from '../components/Loading';
 
 const Home = ({ history, location: { pathname, search } }) => {
   const { data, loading, error } = useQuery(GET_ARTIST, {
@@ -12,7 +13,7 @@ const Home = ({ history, location: { pathname, search } }) => {
     },
   });
 
-  if (loading) return null;
+  if (loading) return <Loading />;
   if (error) {
     console.log(error)
     return <p css={{ fontSize: '1rem' }}>An error occured!</p>;

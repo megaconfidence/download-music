@@ -1,8 +1,13 @@
-import { ApolloClient } from 'apollo-client';
-import { InMemoryCache } from 'apollo-cache-inmemory';
 import { ApolloLink } from 'apollo-link';
 import { HttpLink } from 'apollo-link-http';
+import { ApolloClient } from 'apollo-client';
 import { setContext } from 'apollo-link-context';
+import { InMemoryCache } from 'apollo-cache-inmemory';
+import  dotenv  from  'dotenv' 
+if (process.env.NODE_ENV !== 'production') {
+  dotenv.config();
+}
+
 
 const delay = setContext(
   (request) =>
@@ -16,7 +21,7 @@ const delay = setContext(
 
 const cache = new InMemoryCache();
 const http = new HttpLink({
-  uri: 'http://localhost:4000/',
+  uri: process.env.API,
 });
 
 const link = ApolloLink.from([delay, http]);

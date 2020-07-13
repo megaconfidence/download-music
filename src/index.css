@@ -8,6 +8,7 @@ body {
   background-color: #15202b;
   color: #fff;
   font-size: 62.5%;
+  position: relative;
 }
 
 code {

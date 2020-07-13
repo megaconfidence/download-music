@@ -2,7 +2,7 @@
 import { jsx } from '@emotion/core';
 import SongItem from './SongItem';
 
-const SongList = ({ song, highlightID }) => {
+const SongList = ({ song, highlightID, getLinks, downloadOne }) => {
   return (
     <div
       css={{
@@ -20,8 +20,10 @@ const SongList = ({ song, highlightID }) => {
         )
         .map((s, k) => (
           <SongItem
-            key={k}
             {...s}
+            key={k}
+            getLinks={getLinks}
+            downloadOne={downloadOne}
             highlight={s.id === highlightID ? true : false}
           />
         ))}
