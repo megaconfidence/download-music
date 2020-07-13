@@ -5,6 +5,7 @@ import mq from './MediaQuery';
 const DownloadBtn = ({ callback }) => (
   <svg
     onClick={callback}
+    className='single_download_btn'
     viewBox='0 0 24 20'
     css={{
       fill: 'rgb(29, 161, 242)',
@@ -98,7 +99,12 @@ const SongItem = ({
           <time>{duration}</time>
         </div>
         {url ? (
-          <a css={{ all: 'unset' }} href={url} download>
+          <a
+            className='single_download_btn'
+            css={{ all: 'unset' }}
+            href={url}
+            download
+          >
             <DownloadBtn callback={() => {}} />
           </a>
         ) : (

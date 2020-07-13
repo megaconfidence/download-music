@@ -21,6 +21,7 @@ const DownloadAll = ({ callback }) => {
         borderRadius: '9999px',
         border: `2px solid ${blue}`,
       }}
+      className='multi_download_btn'
       onClick={callback}
     >
       Download All
