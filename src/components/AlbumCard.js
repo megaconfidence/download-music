@@ -4,7 +4,6 @@ import mq from './MediaQuery';
 import { Link } from 'react-router-dom';
 
 const AlbumCard = ({ id, name, year, cover, artist, genre }) => {
-
   return (
     <Link
       to={`/album/${id}`}
@@ -38,7 +37,10 @@ const AlbumCard = ({ id, name, year, cover, artist, genre }) => {
           borderTopLeftRadius: '14px',
           borderTopRightRadius: '14px',
           backgroundRepeat: 'no-repeat',
-          backgroundImage: `url(${cover})`,
+          backgroundImage: `url(${cover.replace(
+            'http://cdn-41.myzcloud.pro',
+            'https://cdn-41-a.myzcloud.me'
+          )})`,
         }}
       ></div>
       <div
@@ -52,12 +54,12 @@ const AlbumCard = ({ id, name, year, cover, artist, genre }) => {
             textTransform: 'capitalize',
           }}
         >
-          {artist.map(a => a.name).join(' / ')}
+          {artist.map((a) => a.name).join(' / ')}
         </div>
         <div
           css={{
             fontSize: '1rem',
-            textTransform: 'capitalize'
+            textTransform: 'capitalize',
           }}
         >
           {name}
@@ -75,7 +77,7 @@ const AlbumCard = ({ id, name, year, cover, artist, genre }) => {
             },
           }}
         >
-           {genre.map(a => a.name).join(' / ')}
+          {genre.map((a) => a.name).join(' / ')}
         </div>
         <div
           css={{
