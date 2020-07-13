@@ -37,13 +37,12 @@ const Album = ({ location: { pathname } }) => {
         }
       });
 
+      const mLinks = newSong.map((s) => s.url);
+      setMultiLinks(mLinks);
       if (!playId) {
-        const mLinks = newSong.map((s) => s.url);
-        setMultiLinks(mLinks);
         callback(mLinks);
       } else {
         const [obj] = newSong.filter((s) => s.playId === playId);
-        console.log(obj);
         callback(obj.url);
       }
 
@@ -75,13 +74,14 @@ const Album = ({ location: { pathname } }) => {
   if (loading) return <Loading />;
   if (error) {
     console.log(error);
-    return <p css={{ fontSize: '1rem' }}>An error occured!</p>;
+    return <p css={{ fontSize: '1rem' }}>...something went wrong</p>;
   }
 
   return (
     <div
       css={{
         display: 'block',
+        marginBottom: '3rem',
         justifyContent: 'center',
         [mq[1]]: {
           display: 'flex',

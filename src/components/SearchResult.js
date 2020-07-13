@@ -2,7 +2,11 @@
 import { jsx } from '@emotion/core';
 import { Link } from 'react-router-dom';
 
-const SearchResult = ({ searchAlbum=[], searchArtist=[], searchSong=[] }) => {
+const SearchResult = ({
+  searchAlbum = [false],
+  searchArtist = [false],
+  searchSong = [false],
+}) => {
   return (
     <div
       css={{
@@ -33,7 +37,7 @@ const SearchResult = ({ searchAlbum=[], searchArtist=[], searchSong=[] }) => {
               display: 'block',
               cursor: 'pointer',
               borderBottom: '1px solid #38444d',
-              
+
               '&:last-of-type': {
                 borderBottom: 'none',
                 borderBottomLeftRadius: '14px',
@@ -46,7 +50,7 @@ const SearchResult = ({ searchAlbum=[], searchArtist=[], searchSong=[] }) => {
               '&:hover': {
                 backgroundColor: 'rgba(255, 255, 255, 0.1)',
               },
-              
+
               'div:last-child': {
                 marginLeft: '1rem',
                 fontSize: '0.7rem',
@@ -65,44 +69,46 @@ const SearchResult = ({ searchAlbum=[], searchArtist=[], searchSong=[] }) => {
             },
           }}
         >
-          {searchAlbum.map((a, k) => (
-            <Link key={k + a.name} to={`/album/${a.id}`}>
+          {searchAlbum.map((a, k) =>
+            a ? (
+              <Link key={k + a.name} to={`/album/${a.id}`}>
+                <li>
+                  <div>{a.name}</div>
+                  <div>album</div>
+                </li>
+              </Link>
+            ) : null
+          )}
+          {searchArtist.map((a, k) =>
+            a ? (
+              <Link key={k + a.name} to={`/artist/${a.id}`}>
+                <li>
+                  <div>{a.name}</div>
+                  <div>artist</div>
+                </li>
+              </Link>
+            ) : null
+          )}
+          {searchSong.map((s, k) =>
+            s ? (
+              <Link key={k + s.name} to={`/song/${s.id}`}>
+                <li>
+                  <div>{s.name}</div>
+                  <div>song</div>
+                </li>
+              </Link>
+            ) : null
+          )}
+          {!searchAlbum.length && !searchArtist.length && !searchSong.length ? (
+            <Link key={0} to='#'>
               <li>
-                <div>{a.name}</div>
-                <div>album</div>
+                <div>no result found</div>
+                <div css={{ display: 'none' }}>
+                  {/* This is a clearfix div*/}
+                </div>
               </li>
             </Link>
-          ))}
-
-          {searchArtist.map((a, k) => (
-            <Link key={k + a.name} to={`/artist/${a.id}`}>
-              <li>
-                <div>{a.name}</div>
-                <div>artist</div>
-              </li>
-            </Link>
-          ))}
-
-          {searchSong.map((s, k) => (
-            <Link key={k + s.name} to={`/song/${s.id}`}>
-              <li>
-                <div>{s.name}</div>
-                <div>song</div>
-              </li>
-            </Link>
-          ))}
-          {/* <li>
-            <div>song result</div>
-            <div>song</div>
-          </li>
-          <li>
-            <div>artist result</div>
-            <div>artist</div>
-          </li>
-          <li>
-            <div>genre result</div>
-            <div>genre</div>
-          </li> */}
+          ) : null}
         </ul>
       </div>
     </div>

@@ -10,11 +10,16 @@ const AlbumCard = ({ id, name, year, cover, artist, genre }) => {
       to={`/album/${id}`}
       css={{
         all: 'unset',
-        width: '100%',
+        width: '15rem',
+        '@media  ( max-width :  549px )': {
+          width: 'calc((100vw / 2) - 1rem)',
+        },
         cursor: 'pointer',
         fontSize: '0.8rem',
         borderRadius: '14px',
-        display: 'inline-block',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
         backgroundColor: '#192734',
         [mq[1]]: {
           width: '15rem',

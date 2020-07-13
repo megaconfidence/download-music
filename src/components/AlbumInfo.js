@@ -19,7 +19,7 @@ const DownloadAll = ({ callback }) => {
         cursor: 'pointer',
         textAlign: 'center',
         borderRadius: '9999px',
-        border: `1px solid ${blue}`,
+        border: `2px solid ${blue}`,
       }}
       onClick={callback}
     >
@@ -54,8 +54,8 @@ const AlbumInfo = ({
     >
       <div
         css={{
-          width: '16rem',
-          height: '13rem',
+          width: '220px',
+          height: '220px',
           backgroundSize: 'cover',
           marginRight: '1rem',
           [mq[1]]: {
@@ -72,9 +72,8 @@ const AlbumInfo = ({
       <div>
         <table
           css={{
-            fontSize: '0.7rem',
+            fontSize: '0.9rem',
             [mq[1]]: {
-              fontSize: '1rem',
               margin: '1rem 0 0',
             },
             td: {

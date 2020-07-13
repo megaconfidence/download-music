@@ -16,7 +16,7 @@ const Song = ({ location: { pathname } }) => {
   if (loading) return <Loading />;
   if (error) {
     console.log(error)
-    return <p css={{ fontSize: '1rem' }}>An error occured!</p>;
+    return <p css={{ fontSize: '1rem' }}>...something went wrong</p>;
   }
   return (
     <div

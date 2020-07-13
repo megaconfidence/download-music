@@ -16,7 +16,7 @@ const Home = ({ history, location: { pathname, search } }) => {
   if (loading) return <Loading />;
   if (error) {
     console.log(error)
-    return <p css={{ fontSize: '1rem' }}>An error occured!</p>;
+    return <p css={{ fontSize: '1rem' }}>...something went wrong</p>;
   }
   return (
     <div>
@@ -33,6 +33,9 @@ const Home = ({ history, location: { pathname, search } }) => {
         css={{
           display: 'grid',
           gridGap: '1rem',
+          '@media  ( max-width :  549px )': {
+            gridGap: '0.65rem',
+          },
           justifyContent: 'center',
           gridTemplateColumns: 'repeat(2, auto)',
           [mq[1]]: {

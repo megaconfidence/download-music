@@ -11,13 +11,13 @@ const SearchBar = ({ history }) => {
   const focusColor = 'rgb(29, 161, 242)';
   const [result, setResult] = useState({});
   const [inputValue, setInputValue] = useState('');
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
 
   const resetSearch = () => {
     setResult({});
     setInputValue('');
-    setIsLoading(true);
+    setIsLoading(false);
     setIsFocused(false);
   };
 
@@ -27,15 +27,14 @@ const SearchBar = ({ history }) => {
     const duration = 500;
     clearTimeout(target._timer);
     target._timer = setTimeout(async () => {
+      setIsLoading(true);
       try {
-        const { data, loading, error } = await client.query({
+        const { data } = await client.query({
           query: SEARCH,
           variables: {
             input: { query: target.value.toLowerCase(), limit: 3 },
           },
         });
-        if (loading) setIsLoading(true);
-        if (error) console.log(error);
         setResult(data);
         setIsLoading(false);
       } catch (error) {
@@ -46,7 +45,10 @@ const SearchBar = ({ history }) => {
 
   useEffect(() => {
     history.listen(() => {
-      resetSearch();
+      setTimeout(() => {
+        resetSearch();
+        window.document.activeElement.blur();
+      }, 700);
     });
   }, [history]);
 
@@ -54,10 +56,15 @@ const SearchBar = ({ history }) => {
     <div
       tabIndex='1'
       onFocus={() => {
-        setIsFocused(true);
+        setTimeout(() => {
+          setIsFocused(true);
+          inputElement.current.focus();
+        }, 300);
       }}
       onBlur={() => {
-        setIsFocused(false);
+        setTimeout(() => {
+          setIsFocused(false);
+        }, 300);
       }}
       css={{
         position: 'relative',
@@ -66,11 +73,12 @@ const SearchBar = ({ history }) => {
         display: 'inline-flex',
         borderRadius: '9999px',
         width: 'calc(100% - 0)',
-        '&:focus': { outline: 'none' },
-        '$::-moz-focus-inner ': { border: '0' },
         justifyContent: 'space-between',
         [mq[1]]: {
           width: '30rem',
+        },
+        '@media  ( max-width :  780px )': {
+          width: '40rem',
         },
         border: `2px solid ${isFocused ? focusColor : 'transparent'}`,
       }}
@@ -81,14 +89,58 @@ const SearchBar = ({ history }) => {
           alignItems: 'center',
         }}
       >
-        <svg
-          viewBox='0 0 24 24'
-          css={{ margin: '0 10px', fill: isFocused ? focusColor : '#a6a5a5' }}
-        >
-          <g>
-            <path d='M21.53 20.47l-3.66-3.66C19.195 15.24 20 13.214 20 11c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9c2.215 0 4.24-.804 5.808-2.13l3.66 3.66c.147.146.34.22.53.22s.385-.073.53-.22c.295-.293.295-.767.002-1.06zM3.5 11c0-4.135 3.365-7.5 7.5-7.5s7.5 3.365 7.5 7.5-3.365 7.5-7.5 7.5-7.5-3.365-7.5-7.5z'></path>
-          </g>
-        </svg>
+        {isLoading ? (
+          <div css={{ margin: '0 10px' }}>
+            <svg
+              viewBox='0 0 32 32'
+              css={{
+                animationName: 'rotate',
+                animationDuration: '0.75s',
+                animationTimingFunction: 'linear',
+                animationIterationCount: 'infinite',
+
+                '@keyframes rotate': {
+                  '0%': {
+                    transform: 'rotate(0deg)',
+                  },
+                  '100%': {
+                    transform: 'rotate(360deg)',
+                  },
+                },
+              }}
+            >
+              <circle
+                cx='16'
+                cy='16'
+                fill='none'
+                r='14'
+                strokeWidth='4'
+                style={{ stroke: 'rgb(29, 161, 242)', opacity: '0.2' }}
+              ></circle>
+              <circle
+                cx='16'
+                cy='16'
+                fill='none'
+                r='14'
+                strokeWidth='4'
+                style={{
+                  strokeDasharray: '80px',
+                  strokeDashoffset: '60px',
+                  stroke: 'rgb(29, 161, 242)',
+                }}
+              ></circle>
+            </svg>
+          </div>
+        ) : (
+          <svg
+            viewBox='0 0 24 24'
+            css={{ margin: '0 10px', fill: isFocused ? focusColor : '#a6a5a5' }}
+          >
+            <g>
+              <path d='M21.53 20.47l-3.66-3.66C19.195 15.24 20 13.214 20 11c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9c2.215 0 4.24-.804 5.808-2.13l3.66 3.66c.147.146.34.22.53.22s.385-.073.53-.22c.295-.293.295-.767.002-1.06zM3.5 11c0-4.135 3.365-7.5 7.5-7.5s7.5 3.365 7.5 7.5-3.365 7.5-7.5 7.5-7.5-3.365-7.5-7.5z'></path>
+            </g>
+          </svg>
+        )}
         <input
           ref={inputElement}
           css={{
@@ -96,6 +148,12 @@ const SearchBar = ({ history }) => {
             height: '3rem',
             border: 'unset',
             background: 'unset',
+            '@media  ( max-width :  420px )': {
+              width: '200px',
+            },
+            '@media  ( max-width :  320px )': {
+              width: '150px',
+            },
           }}
           value={inputValue}
           onChange={inputHandler}
@@ -133,7 +191,9 @@ const SearchBar = ({ history }) => {
         </svg>
       </div>
 
-      {!isLoading ? <SearchResult {...result} /> : null}
+      {!isLoading && isFocused && inputValue ? (
+        <SearchResult {...result} />
+      ) : null}
     </div>
   );
 };

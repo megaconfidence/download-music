@@ -61,13 +61,28 @@ const SongItem = ({
       >
         <div
           css={{
-            maxWidth: '200px',
+            maxWidth: '300px',
             marginLeft: '10px',
             [mq[1]]: {
               maxWidth: '300px',
             },
             [mq[2]]: {
               maxWidth: '400px',
+            },
+            '@media ( min-width :  400px) and  ( max-width :  440px )': {
+              maxWidth: '200px',
+            },
+            '@media  ( max-width :  400px )': {
+              maxWidth: '150px',
+            },
+            '@media  ( max-width :  320px )': {
+              maxWidth: '120px',
+            },
+            '@media  ( min-width :  770px) and (max-width :  970px )': {
+              maxWidth: '120px',
+            },
+            '@media  ( min-width :  970px) and (max-width :  1150px )': {
+              maxWidth: '150px',
             },
             overflow: 'hidden',
             whiteSpace: 'nowrap',

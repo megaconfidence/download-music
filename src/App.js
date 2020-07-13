@@ -16,7 +16,9 @@ function App() {
         <div
           css={{
             margin: '1rem',
-            [mq[1]]: {
+            [mq[2]]: {
+              margin: '2rem 5rem',
+            },  [mq[3]]: {
               margin: '2rem 15rem',
             },
           }}
