@@ -37,6 +37,9 @@ const SearchResult = ({
               display: 'block',
               cursor: 'pointer',
               borderBottom: '1px solid #38444d',
+              '&:visited': {
+                color: '#fff',
+              },
 
               '&:last-of-type': {
                 borderBottom: 'none',
