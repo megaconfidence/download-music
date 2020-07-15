@@ -67,10 +67,16 @@ const AlbumInfo = ({
           },
           borderRadius: '4px',
           backgroundRepeat: 'no-repeat',
-          backgroundImage: `url(${cover.replace(
-            'http://cdn-41.myzcloud.pro',
-            'https://cdn-41-a.myzcloud.me'
-          )})`,
+          backgroundImage: `url(${cover
+            .replace(
+              'http://cdn-41.myzcloud.pro',
+              'https://cdn-41-a.myzcloud.me'
+            )
+            .replace('http://cdn-39.myzcloud.pro', 'https://cdn-39.myzcloud.me')
+            .replace(
+              'http://cdn-37.myzcloud.pro',
+              'https://cdn-37.myzcloud.me'
+            )})`,
         }}
       />
       <div>
