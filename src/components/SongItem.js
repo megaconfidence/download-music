@@ -2,7 +2,7 @@
 import { jsx } from '@emotion/core';
 import mq from './MediaQuery';
 
-const DownloadBtn = ({ callback }) => (
+const DownloadBtn = ({ callback, highlight }) => (
   <span
     onClick={callback}
     className='single_download_btn'
@@ -15,7 +15,7 @@ const DownloadBtn = ({ callback }) => (
       viewBox='0 0 24 20'
       css={{
         pointerEvents: 'none',
-        fill: 'rgb(29, 161, 242)',
+        fill: highlight ? '#15202b' : 'rgb(29, 161, 242)',
       }}
     >
       <g>
@@ -106,12 +106,14 @@ const SongItem = ({
         </div>
         {url ? (
           <DownloadBtn
+            highlight={highlight}
             callback={() => {
               downloadOne(url);
             }}
           />
         ) : (
           <DownloadBtn
+            highlight={highlight}
             callback={() => {
               getLinks(downloadOne, playId);
             }}
