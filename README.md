@@ -19,6 +19,8 @@ Connect the project to your hosting provider (i.e netlify or vercel) and they wi
 ## Project Road Map
 This is the roadmap of the project for the foreseeable future:
 - [x] Release first stable version
+- [x] Offline capable with PWA
+- [ ] Graphql response caching
 - [ ] Implement testing
 - [ ] Add more songs to platform
 - [ ] Optimize for speed
