@@ -35,7 +35,11 @@ const TopBar = ({ location: { pathname }, history }) => {
             },
           }}
           onClick={() => {
-            history.goBack();
+            if (history.length <= 1) {
+              history.replace('/');
+            } else {
+              history.goBack();
+            }
           }}
         >
           <svg viewBox='0 0 24 24' fill='rgb(29, 161, 242)'>

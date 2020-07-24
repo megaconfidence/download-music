@@ -18,7 +18,7 @@ const cache = new InMemoryCache();
 const http = new HttpLink({
   uri:
     process.env.NODE_ENV === 'development'
-      ? 'http://192.168.8.100:4000/'
+      ? 'http://localhost:4000/'
       : process.env.REACT_APP_API,
 });
 

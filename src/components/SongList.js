@@ -3,6 +3,7 @@ import { jsx } from '@emotion/core';
 import SongItem from './SongItem';
 
 const SongList = ({ song, highlightID, getLinks, downloadOne }) => {
+  console.log(getLinks)
   return (
     <div
       css={{
