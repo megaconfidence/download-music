@@ -107,10 +107,16 @@ export const SEARCH = gql`
     searchSong(input: $input) {
       id
       name
+      artist {
+        name
+      }
     }
     searchAlbum(input: $input) {
       id
       name
+      artist {
+        name
+      }
     }
     searchArtist(input: $input) {
       id

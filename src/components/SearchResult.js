@@ -67,21 +67,18 @@ const SearchResult = ({
                 alignItems: 'center',
                 'div:first-of-type': {
                   textTransform: 'capitalize',
+                  span: {
+                    color: '#888f9a',
+                    fontSize: '0.85rem',
+                    span: {
+                      textTransform: 'lowercase',
+                    },
+                  },
                 },
               },
             },
           }}
         >
-          {searchAlbum.map((a, k) =>
-            a ? (
-              <Link key={k + a.name} to={`/album/${a.id}`}>
-                <li>
-                  <div>{a.name}</div>
-                  <div>album</div>
-                </li>
-              </Link>
-            ) : null
-          )}
           {searchArtist.map((a, k) =>
             a ? (
               <Link key={k + a.name} to={`/artist/${a.id}`}>
@@ -92,11 +89,33 @@ const SearchResult = ({
               </Link>
             ) : null
           )}
+          {searchAlbum.map((a, k) =>
+            a ? (
+              <Link key={k + a.name} to={`/album/${a.id}`}>
+                <li>
+                  <div>
+                    {a.name}
+                    <span>
+                      &nbsp;(<span>by</span>&nbsp;
+                      {a.artist.map((a) => a.name).join(', ')})
+                    </span>
+                  </div>
+                  <div>album</div>
+                </li>
+              </Link>
+            ) : null
+          )}
           {searchSong.map((s, k) =>
             s ? (
               <Link key={k + s.name} to={`/song/${s.id}`}>
                 <li>
-                  <div>{s.name}</div>
+                  <div>
+                    {s.name}
+                    <span>
+                      &nbsp;(<span>by</span>&nbsp;
+                      {s.artist.map((a) => a.name).join(', ')})
+                    </span>
+                  </div>
                   <div>song</div>
                 </li>
               </Link>
