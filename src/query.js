@@ -75,7 +75,6 @@ export const GET_LINKS = gql`
 `;
 
 export const GET_SONG = gql`
-  # Write your query or mutation here
   query GetSong($id: ID!) {
     song(id: $id) {
       id
