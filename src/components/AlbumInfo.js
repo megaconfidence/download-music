@@ -1,6 +1,6 @@
 /**  @jsx jsx  */
 import { jsx } from '@emotion/core';
-import mq from './MediaQuery';
+import mq from './mq';
 
 const DownloadAll = ({ callback }) => {
   const blue = 'rgb(29, 161, 242)';
@@ -32,7 +32,7 @@ const DownloadAll = ({ callback }) => {
 const AlbumInfo = ({
   name,
   year,
-  cover,
+  image,
   artist,
   genre,
   getLinks,
@@ -67,7 +67,7 @@ const AlbumInfo = ({
           },
           borderRadius: '4px',
           backgroundRepeat: 'no-repeat',
-          backgroundImage: `url(${cover
+          backgroundImage: `url(${image
             .replace(
               'http://cdn-41.myzcloud.pro',
               'https://cdn-41-a.myzcloud.me'

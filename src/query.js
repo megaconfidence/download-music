@@ -7,7 +7,7 @@ export const GET_ALBUMS = gql`
       url
       name
       year
-      cover
+      image
       artist {
         name
       }
@@ -28,7 +28,7 @@ export const GET_ARTIST = gql`
         url
         name
         year
-        cover
+        image
         artist {
           name
         }
@@ -47,7 +47,7 @@ export const GET_ALBUM = gql`
       url
       name
       year
-      cover
+      image
       artist {
         name
       }
@@ -83,7 +83,7 @@ export const GET_SONG = gql`
         url
         name
         year
-        cover
+        image
         artist {
           name
         }
@@ -113,6 +113,7 @@ export const SEARCH = gql`
     searchAlbum(input: $input) {
       id
       name
+      image
       artist {
         name
       }
@@ -120,6 +121,7 @@ export const SEARCH = gql`
     searchArtist(input: $input) {
       id
       name
+      image
     }
   }
 `;

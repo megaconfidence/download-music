@@ -2,31 +2,29 @@
 import { jsx } from '@emotion/core';
 import mq from './mq';
 import { Link } from 'react-router-dom';
-import { Fragment } from 'react';
 
-const AlbumCard = ({ id='', name='', year='', image='', artist='', genre=[] }) => {
+const ArtistCard = ({ id = '', name = '', image = '' }) => {
   return (
     <Link
-      to={`/album/${id}`}
+      to={`/artist/${id}`}
       css={{
         all: 'unset',
         width: '100%',
         display: 'flex',
         cursor: 'pointer',
         fontSize: '0.8rem',
-        borderRadius: '14px',
+        alignItems: 'center',
         flexDirection: 'column',
         justifyContent: 'space-between',
-        backgroundColor: '#192734',
       }}
     >
       <div
         css={{
           width: '100%',
+          overflow: 'hidden',
           paddingTop: '100%',
+          borderRadius: '100%',
           backgroundSize: 'cover',
-          borderTopLeftRadius: '14px',
-          borderTopRightRadius: '14px',
           backgroundRepeat: 'no-repeat',
           backgroundImage: `url(${image
             .replace(
@@ -43,16 +41,9 @@ const AlbumCard = ({ id='', name='', year='', image='', artist='', genre=[] }) =
       <div
         css={{
           padding: '1rem',
+          textAlign: 'center',
         }}
       >
-        <div
-          css={{
-            marginBottom: '5px',
-            textTransform: 'capitalize',
-          }}
-        >
-          {artist.map((a) => a.name).join(' / ')}
-        </div>
         <div
           css={{
             fontSize: '1rem',
@@ -61,35 +52,9 @@ const AlbumCard = ({ id='', name='', year='', image='', artist='', genre=[] }) =
         >
           {name}
         </div>
-        <div
-          css={{
-            color: '#80919e',
-            fontSize: '0.6rem',
-            margin: '0.5rem 0 0.3rem',
-            textTransform: 'capitalize',
-
-            [mq[1]]: {
-              margin: '0.5rem 0',
-              fontSize: 'inherit',
-            },
-          }}
-        >
-          {genre.map((a) => a.name).join(' / ')}
-        </div>
-        <div
-          css={{
-            color: '#80919e',
-            fontSize: '0.6rem',
-            [mq[1]]: {
-              fontSize: 'inherit',
-            },
-          }}
-        >
-         {year?  <Fragment>Release Year: <time>{year}</time></Fragment>: null}
-        </div>
       </div>
     </Link>
   );
 };
 
-export default AlbumCard;
+export default ArtistCard;
