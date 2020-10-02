@@ -2,13 +2,14 @@
 import { jsx } from '@emotion/core';
 import SongList from '../components/SongList';
 import AlbumInfo from '../components/AlbumInfo';
-import mq from '../components/MediaQuery';
+import mq from '../components/mq';
 import { GET_ALBUM, GET_LINKS } from '../query';
 import client from '../client';
 import { useQuery } from '@apollo/react-hooks';
 import Loading from '../components/Loading';
 import { useState } from 'react';
 import multiDownload from 'multi-download';
+import Error from '../components/Error';
 
 const Album = ({ location: { pathname } }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -71,11 +72,10 @@ const Album = ({ location: { pathname } }) => {
   const downloadOne = (link) => {
     multiDownload([link]);
   };
+  
   if (loading) return <Loading />;
-  if (error) {
-    console.log(error);
-    return <p css={{ fontSize: '1rem' }}>...something went wrong</p>;
-  }
+  if (error) return <Error error={error} />;
+
 
   return (
     <div

@@ -1,10 +1,11 @@
 /**  @jsx jsx  */
 import { jsx } from '@emotion/core';
 import { GET_ARTIST } from '../query';
-import mq from '../components/MediaQuery';
+import mq from '../components/mq';
 import { useQuery } from '@apollo/react-hooks';
 import AlbumCard from '../components/AlbumCard';
 import Loading from '../components/Loading';
+import Error from '../components/Error';
 
 const Home = ({ history, location: { pathname, search } }) => {
   const { data, loading, error } = useQuery(GET_ARTIST, {
@@ -14,10 +15,8 @@ const Home = ({ history, location: { pathname, search } }) => {
   });
 
   if (loading) return <Loading />;
-  if (error) {
-    console.log(error)
-    return <p css={{ fontSize: '1rem' }}>...something went wrong</p>;
-  }
+  if (error) return <Error error={error} />;
+
   return (
     <div>
       <div
@@ -27,7 +26,7 @@ const Home = ({ history, location: { pathname, search } }) => {
           textTransform: 'capitalize',
         }}
       >
-       albums by {data.artist.name}
+        albums by {data.artist.name}
       </div>
       <div
         css={{
@@ -37,9 +36,9 @@ const Home = ({ history, location: { pathname, search } }) => {
             gridGap: '0.65rem',
           },
           justifyContent: 'center',
-          gridTemplateColumns: 'repeat(2, auto)',
+          gridTemplateColumns: 'repeat(2, calc(50% - 1rem))',
           [mq[1]]: {
-            gridTemplateColumns: 'repeat(auto-fill, 15rem)',
+            gridTemplateColumns: 'repeat(4, calc(25% - 1rem))',
           },
         }}
       >

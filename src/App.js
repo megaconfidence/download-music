@@ -5,8 +5,9 @@ import HomeR from './routes/HomeR';
 import AlbumR from './routes/AlbumR';
 import TopBar from './components/TopBar';
 import SongR from './routes/SongR';
-import mq from './components/MediaQuery';
+import mq from './components/mq';
 import ArtistR from './routes/ArtistR';
+import SearchR from './routes/SearchR';
 
 function App() {
   return (
@@ -39,6 +40,11 @@ function App() {
               exact
               path='/artist/:id'
               render={(props) => <ArtistR {...props} />}
+            />
+            <Route
+              exact
+              path='/search'
+              render={(props) => <SearchR {...props} />}
             />
           </Switch>
         </div>

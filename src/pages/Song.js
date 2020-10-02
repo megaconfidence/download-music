@@ -2,7 +2,7 @@
 import { jsx } from '@emotion/core';
 import SongList from '../components/SongList';
 import AlbumInfo from '../components/AlbumInfo';
-import mq from '../components/MediaQuery';
+import mq from '../components/mq';
 import { GET_SONG } from '../query';
 import { useQuery } from '@apollo/react-hooks';
 import Loading from '../components/Loading';
@@ -10,6 +10,7 @@ import multiDownload from 'multi-download';
 import { useState } from 'react';
 import client from '../client';
 import { GET_ALBUM, GET_LINKS } from '../query';
+import Error from '../components/Error';
 
 const Song = ({ location: { pathname } }) => {
   const { data, loading, error } = useQuery(GET_SONG, {
@@ -74,10 +75,8 @@ const Song = ({ location: { pathname } }) => {
   };
 
   if (loading) return <Loading />;
-  if (error) {
-    console.log(error);
-    return <p css={{ fontSize: '1rem' }}>...something went wrong</p>;
-  }
+  if (error) return <Error error={error} />;
+
   return (
     <div
       css={{
