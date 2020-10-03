@@ -4,7 +4,14 @@ import mq from './mq';
 import { Link } from 'react-router-dom';
 import { Fragment } from 'react';
 
-const AlbumCard = ({ id='', name='', year='', image='', artist='', genre=[] }) => {
+const AlbumCard = ({
+  id = '',
+  name = '',
+  year = '',
+  image = '',
+  artist = '',
+  genre = [],
+}) => {
   return (
     <Link
       to={`/album/${id}`}
@@ -67,7 +74,6 @@ const AlbumCard = ({ id='', name='', year='', image='', artist='', genre=[] }) =
             fontSize: '0.6rem',
             margin: '0.5rem 0 0.3rem',
             textTransform: 'capitalize',
-
             [mq[1]]: {
               margin: '0.5rem 0',
               fontSize: 'inherit',
@@ -85,7 +91,11 @@ const AlbumCard = ({ id='', name='', year='', image='', artist='', genre=[] }) =
             },
           }}
         >
-         {year?  <Fragment>Release Year: <time>{year}</time></Fragment>: null}
+          {year ? (
+            <Fragment>
+              Release Year: <time>{year}</time>
+            </Fragment>
+          ) : null}
         </div>
       </div>
     </Link>

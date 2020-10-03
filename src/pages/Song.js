@@ -1,25 +1,26 @@
 /**  @jsx jsx  */
-import { jsx } from '@emotion/core';
-import SongList from '../components/SongList';
-import AlbumInfo from '../components/AlbumInfo';
-import mq from '../components/mq';
-import { GET_SONG } from '../query';
-import { useQuery } from '@apollo/react-hooks';
-import Loading from '../components/Loading';
-import multiDownload from 'multi-download';
-import { useState } from 'react';
 import client from '../client';
-import { GET_ALBUM, GET_LINKS } from '../query';
+import { useState } from 'react';
+import mq from '../components/mq';
+import { jsx } from '@emotion/core';
+import { GET_SONG } from '../query';
 import Error from '../components/Error';
+import multiDownload from 'multi-download';
+import Loading from '../components/Loading';
+import SongList from '../components/SongList';
+import { useQuery } from '@apollo/react-hooks';
+import AlbumInfo from '../components/AlbumInfo';
+import { GET_ALBUM, GET_LINKS } from '../query';
 
 const Song = ({ location: { pathname } }) => {
+  const [multiLinks, setMultiLinks] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
   const { data, loading, error } = useQuery(GET_SONG, {
     variables: {
       id: pathname.replace('/song/', ''),
     },
   });
-  const [multiLinks, setMultiLinks] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
 
   const getLinks = async (callback = () => {}, playId = '') => {
     setIsLoading(true);
@@ -31,13 +32,15 @@ const Song = ({ location: { pathname } }) => {
         },
       });
 
-      const newSong = data.song.album.song.map((s, k) => {
-        for (const i in links.data.songLinks) {
-          if (s.playId === links.data.songLinks[i].playId) {
-            return { ...s, url: links.data.songLinks[i].url };
+      const newSong = [];
+
+      for (const s of data.album.song) {
+        for (const i of links.data.songLinks) {
+          if (s.playId === i.playId) {
+            newSong.push({ ...s, url: i.url });
           }
         }
-      });
+      }
 
       const mLinks = newSong.map((s) => s.url);
       setMultiLinks(mLinks);
@@ -63,6 +66,7 @@ const Song = ({ location: { pathname } }) => {
       console.log(error);
     }
   };
+  
   const downloadAll = (links = []) => {
     if (links.length) {
       multiDownload(links);
@@ -81,10 +85,9 @@ const Song = ({ location: { pathname } }) => {
     <div
       css={{
         display: 'block',
-        marginBottom: '3rem',
-        justifyContent: 'center',
-        [mq[1]]: {
+        [mq[2]]: {
           display: 'flex',
+          justifyContent: 'center',
         },
       }}
     >

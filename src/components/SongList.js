@@ -1,13 +1,15 @@
 /**  @jsx jsx  */
 import { jsx } from '@emotion/core';
+import mq from './mq';
 import SongItem from './SongItem';
 
 const SongList = ({ song, highlightID, getLinks, downloadOne }) => {
   return (
     <div
       css={{
-        minWidth: '50%',
-        maxWidth: '700px',
+        [mq[2]]: {
+          width: '50%',
+        },
         padding: ' 0 1rem',
         height: 'min-content',
         borderRadius: '24px',

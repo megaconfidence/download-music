@@ -20,7 +20,7 @@ const Error = ({ error }) => {
         </g>
       </svg>
 
-      <p css={{ fontSize: '1.2rem' }}>
+      <p css={{ fontSize: '1.2rem', textAlign: 'center' }}>
         Looks like you lost your connection. Please check it and try again.
       </p>
     </div>
