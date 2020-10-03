@@ -1,6 +1,5 @@
 /**  @jsx jsx  */
 import { jsx } from '@emotion/core';
-import mq from './mq';
 
 const DownloadBtn = ({ callback, highlight }) => (
   <span

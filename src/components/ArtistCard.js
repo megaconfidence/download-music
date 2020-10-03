@@ -1,6 +1,5 @@
 /**  @jsx jsx  */
 import { jsx } from '@emotion/core';
-import mq from './mq';
 import { Link } from 'react-router-dom';
 
 const ArtistCard = ({ id = '', name = '', image = '' }) => {

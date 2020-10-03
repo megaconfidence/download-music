@@ -21,7 +21,6 @@ const Search = ({ location }) => {
 
   if (loading) return <Loading />;
   if (error) return <Error error={error} />;
-  console.log(data);
 
   return (
     <div>

@@ -42,12 +42,11 @@ const AlbumInfo = ({
   return (
     <div
       css={{
-        width: '100%',
         display: 'flex',
         justifyContent: 'center',
         marginBottom: '2rem',
-        [mq[1]]: {
-          width: '15rem',
+        [mq[2]]: {
+          width: '50%',
           margin: '0 2rem 2rem',
           display: 'block',
         },
@@ -59,7 +58,7 @@ const AlbumInfo = ({
           height: '220px',
           backgroundSize: 'cover',
           marginRight: '1rem',
-          [mq[1]]: {
+          [mq[2]]: {
             width: '15rem',
             height: '15rem',
             marginRight: '0',
