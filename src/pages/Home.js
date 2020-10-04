@@ -1,13 +1,14 @@
 /**  @jsx jsx  */
+import mq from '../components/mq';
 import { jsx } from '@emotion/core';
 import { GET_ALBUMS } from '../query';
-import mq from '../components/mq';
+import queryString from 'query-string';
+import Error from '../components/Error';
+import Loading from '../components/Loading';
+import { useEffect, useState } from 'react';
 import NextPage from '../components/NextPage';
 import { useQuery } from '@apollo/react-hooks';
 import AlbumCard from '../components/AlbumCard';
-import Loading from '../components/Loading';
-import { useEffect, useState } from 'react';
-import Error from '../components/Error';
 
 const Home = ({ history, location: { pathname, search } }) => {
   // 173
@@ -15,16 +16,9 @@ const Home = ({ history, location: { pathname, search } }) => {
 
   useEffect(() => {
     const p =
-      search && search.includes('page=')
-        ? Number(
-            search
-              .replace('?', '')
-              .split('&')
-              .filter((q) => q.includes('page='))
-              .join()
-              .replace('page=', '')
-          )
-        : Math.floor(Math.random() * 200) + 1;
+      Number(queryString.parse(search)['page']) ||
+      Math.floor(Math.random() * 200) + 1;
+
     setPage(p);
   }, [search]);
 

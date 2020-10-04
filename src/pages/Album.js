@@ -1,6 +1,8 @@
 /**  @jsx jsx  */
 import client from '../client';
 import { useState } from 'react';
+import { Fragment } from 'react';
+import { useEffect } from 'react';
 import mq from '../components/mq';
 import { jsx } from '@emotion/core';
 import Error from '../components/Error';
@@ -9,33 +11,41 @@ import Loading from '../components/Loading';
 import SongList from '../components/SongList';
 import { useQuery } from '@apollo/react-hooks';
 import AlbumInfo from '../components/AlbumInfo';
-import { GET_ALBUM, GET_LINKS } from '../query';
-
+import { GET_ALBUM, GET_LINKS, GET_SONG } from '../query';
 
 const Album = ({ location: { pathname } }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [multiLinks, setMultiLinks] = useState([]);
+  const [gqlQuery, setGqlQuery] = useState(GET_ALBUM);
+  const id = pathname.replace('/album/', '').replace('/song/', '');
 
-  const id = pathname.replace('/album/', '');
-  const { data, loading, error } = useQuery(GET_ALBUM, {
+  const { data, loading, error } = useQuery(gqlQuery, {
     variables: {
       id,
     },
   });
-  
+
+  useEffect(() => {
+    if (pathname.includes('/song/')) {
+      setGqlQuery(GET_SONG);
+    }
+  }, [pathname]);
+
   const getLinks = async (callback = () => {}, playId = '') => {
     setIsLoading(true);
+    const info = data.album ? data.album : data.song.album;
+
     try {
       const links = await client.query({
         query: GET_LINKS,
         variables: {
-          url: data.album.url,
+          url: info.url,
         },
       });
 
       const newSong = [];
 
-      for (const s of data.album.song) {
+      for (const s of info.song) {
         for (const i of links.data.songLinks) {
           if (s.playId === i.playId) {
             newSong.push({ ...s, url: i.url });
@@ -58,7 +68,7 @@ const Album = ({ location: { pathname } }) => {
           id,
         },
         data: {
-          album: { ...data.album, song: newSong },
+          album: { ...info, song: newSong },
         },
       });
       setIsLoading(false);
@@ -67,7 +77,7 @@ const Album = ({ location: { pathname } }) => {
       console.log(error);
     }
   };
-  
+
   const downloadAll = (links = []) => {
     if (links.length) {
       multiDownload(links);
@@ -93,17 +103,36 @@ const Album = ({ location: { pathname } }) => {
       }}
     >
       {isLoading ? <Loading background={'#0f2f40a3'} /> : null}
-      <AlbumInfo
-        {...data.album}
-        getLinks={getLinks}
-        downloadAll={downloadAll}
-        hasGottenLinks={data.album.song[0].url ? true : false}
-      />
-      <SongList
-        getLinks={getLinks}
-        song={data.album.song}
-        downloadOne={downloadOne}
-      />
+      {data.album ? (
+        <Fragment>
+          <AlbumInfo
+            {...data.album}
+            getLinks={getLinks}
+            downloadAll={downloadAll}
+            hasGottenLinks={data.album.song[0].url ? true : false}
+          />
+          <SongList
+            getLinks={getLinks}
+            song={data.album.song}
+            downloadOne={downloadOne}
+          />
+        </Fragment>
+      ) : (
+        <Fragment>
+          <AlbumInfo
+            {...data.song.album}
+            getLinks={getLinks}
+            downloadAll={downloadAll}
+            hasGottenLinks={data.song.album.song[0].url ? true : false}
+          />
+          <SongList
+            getLinks={getLinks}
+            downloadOne={downloadOne}
+            highlightID={data.song.id}
+            song={data.song.album.song}
+          />
+        </Fragment>
+      )}
     </div>
   );
 };

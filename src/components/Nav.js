@@ -122,14 +122,13 @@ const Nav = ({ location: { pathname } }) => {
           </NavLink>
         </li>{' '}
         <li>
-          <NavLink activeStyle={activeStyle} exact to='/genre'>
+          <NavLink activeStyle={activeStyle} to='/genre'>
             <svg
               viewBox='0 0 24 24'
               css={{
-                fill:
-                  pathname === '/genre'
-                    ? 'rgb(29, 161, 242)!important'
-                    : '#fff',
+                fill: pathname.includes('/genre')
+                  ? 'rgb(29, 161, 242)!important'
+                  : '#fff',
               }}
             >
               <g>

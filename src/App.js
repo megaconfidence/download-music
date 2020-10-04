@@ -1,16 +1,17 @@
 /**  @jsx jsx  */
-import { jsx } from '@emotion/core';
-import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
-import HomeR from './routes/HomeR';
-import AlbumR from './routes/AlbumR';
-import TopBar from './components/TopBar';
-import SongR from './routes/SongR';
+import Cat from './pages/Cat';
+import Home from './pages/Home';
 import mq from './components/mq';
-import ArtistR from './routes/ArtistR';
-import SearchR from './routes/SearchR';
+import Album from './pages/Album';
 import Nav from './components/Nav';
-import CatR from './routes/CatR';
+import Artist from './pages/Artist';
+import Search from './pages/Search';
+import { jsx } from '@emotion/core';
 import CatPage from './pages/CatPage';
+import TopBar from './components/TopBar';
+import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
+import Genre from './pages/Genre';
+import GenrePage from './pages/GenrePage';
 
 function App() {
   return (
@@ -61,37 +62,46 @@ function App() {
                 <Route
                   exact
                   path='/'
-                  render={(props) => <HomeR {...props} />}
+                  render={(props) => <Home {...props} />}
                 />
                 <Route
                   exact
                   path='/song/:id'
-                  render={(props) => <SongR {...props} />}
+                  render={(props) => <Album {...props} />}
                 />
                 <Route
                   exact
                   path='/album/:id'
-                  render={(props) => <AlbumR {...props} />}
+                  render={(props) => <Album {...props} />}
                 />
                 <Route
                   exact
                   path='/artist/:id'
-                  render={(props) => <ArtistR {...props} />}
+                  render={(props) => <Artist {...props} />}
                 />
                 <Route
                   exact
                   path='/search'
-                  render={(props) => <SearchR {...props} />}
+                  render={(props) => <Search {...props} />}
                 />
                 <Route
                   exact
                   path='/cat/:cattype'
-                  render={(props) => <CatR {...props} />}
+                  render={(props) => <Cat {...props} />}
                 />
                 <Route
                   exact
                   path='/cat/:cattype/:alpha'
                   render={(props) => <CatPage {...props} />}
+                />
+                <Route
+                  exact
+                  path='/genre'
+                  render={(props) => <Genre {...props} />}
+                /><Route
+                  exact
+                  path='/genre/:id'
+                  render={(props) => <GenrePage {...props} />}
                 />
               </Switch>
             </div>

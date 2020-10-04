@@ -17,10 +17,27 @@ export const GET_ALBUMS = gql`
     }
   }
 `;
+export const ALBUMS_BY_GENRE = gql`
+  query AlbumsByGenre($input: PageByIdInput!) {
+    albumByGenre(input: $input) {
+      id
+      url
+      name
+      year
+      image
+      artist {
+        name
+      }
+      genre {
+        name
+      }
+    }
+  }
+`;
 
 export const ALPHA_ALBUMS = gql`
-  query AlphaAlbums($input: AlphaInput!) {
-    alphaAlbums(input: $input) {
+  query albumsByAlpha($input: AlphaInput!) {
+    albumsByAlpha(input: $input) {
       id
       url
       name
@@ -37,8 +54,8 @@ export const ALPHA_ALBUMS = gql`
 `;
 
 export const ALPHA_ARTISTS = gql`
-  query AlphaArtists($input: AlphaInput!) {
-    alphaArtists(input: $input) {
+  query artistsByAlpha($input: AlphaInput!) {
+    artistsByAlpha(input: $input) {
       id
       name
       image
@@ -150,6 +167,15 @@ export const SEARCH = gql`
       id
       name
       image
+    }
+  }
+`;
+
+export const GET_GENRES = gql`
+  query GetGenres($input: PageInput!) {
+    genres(input: $input) {
+      id
+      name
     }
   }
 `;

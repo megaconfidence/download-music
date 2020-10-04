@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import mq from '../components/mq';
 
 const Cat = ({ location: { pathname } }) => {
-  const cat = pathname.replace('/cat/', '');
   let i;
   return (
     <div>
