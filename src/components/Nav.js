@@ -85,14 +85,13 @@ const Nav = ({ location: { pathname } }) => {
           </NavLink>
         </li>{' '}
         <li>
-          <NavLink activeStyle={activeStyle} exact to='/artist'>
+          <NavLink activeStyle={activeStyle} to='/cat/artist'>
             <svg
               viewBox='0 0 24 24'
               css={{
-                fill:
-                  pathname === '/artist'
-                    ? 'rgb(29, 161, 242)!important'
-                    : '#fff',
+                fill: pathname.includes('/cat/artist')
+                  ? 'rgb(29, 161, 242)!important'
+                  : '#fff',
               }}
             >
               <g>
@@ -103,15 +102,14 @@ const Nav = ({ location: { pathname } }) => {
           </NavLink>
         </li>{' '}
         <li>
-          <NavLink activeStyle={activeStyle} exact to='/album'>
+          <NavLink activeStyle={activeStyle} to='/cat/album'>
             <svg
               viewBox='0 0 512 512'
               xmlns='http://www.w3.org/2000/svg'
               css={{
-                fill:
-                  pathname === '/album'
-                    ? 'rgb(29, 161, 242)!important'
-                    : '#fff',
+                fill: pathname.includes('/cat/album')
+                  ? 'rgb(29, 161, 242)!important'
+                  : '#fff',
               }}
             >
               <path d='m437.008 75.323c-48.351-48.25-112.634-74.823-181.008-74.823s-132.657 26.573-181.008 74.823c-48.359 48.259-74.992 112.425-74.992 180.677s26.633 132.418 74.992 180.677c48.351 48.25 112.634 74.823 181.008 74.823s132.657-26.573 181.008-74.823c48.359-48.259 74.992-112.425 74.992-180.677s-26.633-132.418-74.992-180.677zm-21.191 340.118c-42.687 42.599-99.444 66.059-159.817 66.059s-117.13-23.46-159.817-66.059c-42.679-42.59-66.183-99.214-66.183-159.441s23.504-116.851 66.183-159.441c42.687-42.599 99.444-66.059 159.817-66.059s117.13 23.46 159.817 66.059c42.679 42.59 66.183 99.214 66.183 159.441s-23.504 116.851-66.183 159.441z' />
@@ -124,14 +122,13 @@ const Nav = ({ location: { pathname } }) => {
           </NavLink>
         </li>{' '}
         <li>
-          <NavLink activeStyle={activeStyle} exact to='/genre'>
+          <NavLink activeStyle={activeStyle} to='/genre'>
             <svg
               viewBox='0 0 24 24'
               css={{
-                fill:
-                  pathname === '/genre'
-                    ? 'rgb(29, 161, 242)!important'
-                    : '#fff',
+                fill: pathname.includes('/genre')
+                  ? 'rgb(29, 161, 242)!important'
+                  : '#fff',
               }}
             >
               <g>

@@ -1,7 +1,7 @@
 /**  @jsx jsx  */
 import mq from '../components/mq';
 import { jsx } from '@emotion/core';
-import { GET_ALBUMS } from '../query';
+import { ALBUMS_BY_GENRE } from '../query';
 import queryString from 'query-string';
 import Error from '../components/Error';
 import Loading from '../components/Loading';
@@ -9,22 +9,21 @@ import { useEffect, useState } from 'react';
 import NextPage from '../components/NextPage';
 import { useQuery } from '@apollo/react-hooks';
 import AlbumCard from '../components/AlbumCard';
+import Title from '../components/Title';
 
-const Home = ({ history, location: { pathname, search } }) => {
+const GenrePage = ({ history, location: { pathname, search } }) => {
   // 173
   const [page, setPage] = useState(1);
 
   useEffect(() => {
-    const p =
-      Number(queryString.parse(search)['page']) ||
-      Math.floor(Math.random() * 200) + 1;
+    const p = Number(queryString.parse(search)['page']) || 1;
 
     setPage(p);
   }, [search]);
 
-  const { data, loading, error } = useQuery(GET_ALBUMS, {
+  const { data, loading, error } = useQuery(ALBUMS_BY_GENRE, {
     variables: {
-      input: { page, limit: 8 },
+      input: { page, limit: 8, id: pathname.split('/').slice(-1)[0] },
     },
   });
 
@@ -33,6 +32,7 @@ const Home = ({ history, location: { pathname, search } }) => {
 
   return (
     <div>
+      <Title title={`genre / ${data.albumByGenre.name}`} />
       <div
         css={{
           display: 'grid',
@@ -47,7 +47,7 @@ const Home = ({ history, location: { pathname, search } }) => {
           },
         }}
       >
-        {data.albums.map((album, k) => (
+        {data.albumByGenre.albums.map((album, k) => (
           <AlbumCard key={k} {...album} />
         ))}
       </div>
@@ -56,4 +56,4 @@ const Home = ({ history, location: { pathname, search } }) => {
   );
 };
 
-export default Home;
+export default GenrePage;

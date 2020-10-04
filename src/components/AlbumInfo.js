@@ -47,7 +47,7 @@ const AlbumInfo = ({
         marginBottom: '2rem',
         [mq[2]]: {
           width: '50%',
-          margin: '0 2rem 2rem',
+          marginRight: '2rem',
           display: 'block',
         },
       }}

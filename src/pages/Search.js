@@ -10,6 +10,7 @@ import Loading from '../components/Loading';
 import Error from '../components/Error';
 import SongItem from '../components/SongItem';
 import { Link } from 'react-router-dom';
+import Title from '../components/Title';
 
 const Search = ({ location }) => {
   const query = queryString.parse(location.search)['q'].toLowerCase();
@@ -24,18 +25,13 @@ const Search = ({ location }) => {
 
   return (
     <div>
-      <div
-        css={{
-          fontSize: '2rem',
-          marginBottom: '2rem',
-        }}
-      >
+        <Title title=
         {!data.searchArtist.length &&
         !data.searchAlbum.length &&
         !data.searchSong.length
           ? `No results for "${query}"`
           : `Results for "${query}"`}
-      </div>
+          />
       {data.searchArtist.length ? (
         <div
           css={{
