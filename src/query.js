@@ -18,6 +18,34 @@ export const GET_ALBUMS = gql`
   }
 `;
 
+export const ALPHA_ALBUMS = gql`
+  query AlphaAlbums($input: AlphaInput!) {
+    alphaAlbums(input: $input) {
+      id
+      url
+      name
+      year
+      image
+      artist {
+        name
+      }
+      genre {
+        name
+      }
+    }
+  }
+`;
+
+export const ALPHA_ARTISTS = gql`
+  query AlphaArtists($input: AlphaInput!) {
+    alphaArtists(input: $input) {
+      id
+      name
+      image
+    }
+  }
+`;
+
 export const GET_ARTIST = gql`
   query GetArtist($id: ID!) {
     artist(id: $id) {

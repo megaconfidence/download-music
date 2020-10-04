@@ -9,6 +9,8 @@ import mq from './components/mq';
 import ArtistR from './routes/ArtistR';
 import SearchR from './routes/SearchR';
 import Nav from './components/Nav';
+import CatR from './routes/CatR';
+import CatPage from './pages/CatPage';
 
 function App() {
   return (
@@ -18,11 +20,11 @@ function App() {
         <div
           css={{
             left: '50%',
+            width: '100vw',
             overflowY: 'hidden',
             position: 'relative',
             height: 'calc(100vh - 87px)',
             transform: 'translateX(-50%)',
-            width: '100vw',
             [mq[2]]: {
               maxWidth: '80vw',
             },
@@ -34,9 +36,9 @@ function App() {
           <Nav />
           <div
             css={{
+              padding: '10px',
               overflowY: 'auto',
               position: 'absolute',
-              padding: '10px',
               width: 'calc(100% - 20px)',
               height: 'calc(100vh - 87px)',
               [mq[2]]: {
@@ -80,6 +82,16 @@ function App() {
                   exact
                   path='/search'
                   render={(props) => <SearchR {...props} />}
+                />
+                <Route
+                  exact
+                  path='/cat/:cattype'
+                  render={(props) => <CatR {...props} />}
+                />
+                <Route
+                  exact
+                  path='/cat/:cattype/:alpha'
+                  render={(props) => <CatPage {...props} />}
                 />
               </Switch>
             </div>
