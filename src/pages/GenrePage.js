@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react';
 import NextPage from '../components/NextPage';
 import { useQuery } from '@apollo/react-hooks';
 import AlbumCard from '../components/AlbumCard';
+import Title from '../components/Title';
 
 const GenrePage = ({ history, location: { pathname, search } }) => {
   // 173
@@ -31,6 +32,7 @@ const GenrePage = ({ history, location: { pathname, search } }) => {
 
   return (
     <div>
+      <Title title={`genre / ${data.albumByGenre.name}`} />
       <div
         css={{
           display: 'grid',
@@ -45,7 +47,7 @@ const GenrePage = ({ history, location: { pathname, search } }) => {
           },
         }}
       >
-        {data.albumByGenre.map((album, k) => (
+        {data.albumByGenre.albums.map((album, k) => (
           <AlbumCard key={k} {...album} />
         ))}
       </div>

@@ -10,17 +10,20 @@ import NextPage from '../components/NextPage';
 import { useQuery } from '@apollo/react-hooks';
 import AlbumCard from '../components/AlbumCard';
 import ArtistCard from '../components/ArtistCard';
+import Title from '../components/Title';
 
 const CatPage = ({ history, location: { pathname, search } }) => {
+  const cat = pathname.split('/')[2];
   const [page, setPage] = useState(1);
+  const alpha = pathname.split('/').slice(-1)[0];
   const [gqlQuery, setGqlQuery] = useState(ALPHA_ARTISTS);
-
+  
   const { data, loading, error } = useQuery(gqlQuery, {
     variables: {
       input: {
+        alpha,
         limit: 8,
         page: String(page),
-        alpha: pathname.split('/').slice(-1)[0],
       },
     },
   });
@@ -38,6 +41,7 @@ const CatPage = ({ history, location: { pathname, search } }) => {
 
   return (
     <div>
+      <Title title={`${cat} / ${alpha}`} />
       <div
         css={{
           display: 'grid',

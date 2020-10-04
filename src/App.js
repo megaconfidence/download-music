@@ -26,8 +26,11 @@ function App() {
             position: 'relative',
             height: 'calc(100vh - 87px)',
             transform: 'translateX(-50%)',
+            borderRight: '1px solid #38444d',
             [mq[2]]: {
               maxWidth: '80vw',
+              left: 'calc(50% - 170px)',
+              transform: 'translateX(calc(-50% + 85px))',
             },
             [mq[3]]: {
               maxWidth: '70vw',
@@ -51,19 +54,16 @@ function App() {
           >
             <div
               css={{
-                marginBottom: '4rem',
+                marginBottom: '5rem',
                 position: 'relative',
                 [mq[2]]: {
+                  marginRight: '20px',
                   marginBottom: '2rem',
                 },
               }}
             >
               <Switch>
-                <Route
-                  exact
-                  path='/'
-                  render={(props) => <Home {...props} />}
-                />
+                <Route exact path='/' render={(props) => <Home {...props} />} />
                 <Route
                   exact
                   path='/song/:id'
@@ -98,7 +98,8 @@ function App() {
                   exact
                   path='/genre'
                   render={(props) => <Genre {...props} />}
-                /><Route
+                />
+                <Route
                   exact
                   path='/genre/:id'
                   render={(props) => <GenrePage {...props} />}

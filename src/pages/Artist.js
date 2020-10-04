@@ -6,6 +6,7 @@ import { useQuery } from '@apollo/react-hooks';
 import AlbumCard from '../components/AlbumCard';
 import Loading from '../components/Loading';
 import Error from '../components/Error';
+import Title from '../components/Title';
 
 const Home = ({ history, location: { pathname, search } }) => {
   const { data, loading, error } = useQuery(GET_ARTIST, {
@@ -19,15 +20,7 @@ const Home = ({ history, location: { pathname, search } }) => {
 
   return (
     <div>
-      <div
-        css={{
-          fontSize: '2rem',
-          marginBottom: '2rem',
-          textTransform: 'capitalize',
-        }}
-      >
-        albums by {data.artist.name}
-      </div>
+      <Title title={`albums by ${data.artist.name}`} />
       <div
         css={{
           display: 'grid',

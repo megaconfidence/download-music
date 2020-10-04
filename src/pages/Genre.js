@@ -9,6 +9,7 @@ import mq from '../components/mq';
 import NextPage from '../components/NextPage';
 import { GET_GENRES } from '../query';
 import queryString from 'query-string';
+import Title from '../components/Title';
 
 const Genre = ({ history, location: { search } }) => {
   const [page, setPage] = useState(1);
@@ -30,6 +31,7 @@ const Genre = ({ history, location: { search } }) => {
 
   return (
     <div>
+      <Title title='genre'/>
       <div
         css={{
           display: 'grid',

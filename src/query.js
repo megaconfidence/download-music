@@ -21,15 +21,19 @@ export const ALBUMS_BY_GENRE = gql`
   query AlbumsByGenre($input: PageByIdInput!) {
     albumByGenre(input: $input) {
       id
-      url
       name
-      year
-      image
-      artist {
+      albums {
+        id
+        url
         name
-      }
-      genre {
-        name
+        year
+        image
+        artist {
+          name
+        }
+        genre {
+          name
+        }
       }
     }
   }

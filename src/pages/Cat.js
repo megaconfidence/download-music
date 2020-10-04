@@ -2,11 +2,13 @@
 import { jsx } from '@emotion/core';
 import { Link } from 'react-router-dom';
 import mq from '../components/mq';
+import Title from '../components/Title';
 
 const Cat = ({ location: { pathname } }) => {
   let i;
   return (
     <div>
+      <Title title={pathname.split('/').slice(-1)[0]} />
       <div
         css={{
           display: 'grid',

@@ -12,6 +12,7 @@ import SongList from '../components/SongList';
 import { useQuery } from '@apollo/react-hooks';
 import AlbumInfo from '../components/AlbumInfo';
 import { GET_ALBUM, GET_LINKS, GET_SONG } from '../query';
+import Title from '../components/Title';
 
 const Album = ({ location: { pathname } }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -93,46 +94,49 @@ const Album = ({ location: { pathname } }) => {
   if (error) return <Error error={error} />;
 
   return (
-    <div
-      css={{
-        display: 'block',
-        [mq[2]]: {
-          display: 'flex',
-          justifyContent: 'center',
-        },
-      }}
-    >
-      {isLoading ? <Loading background={'#0f2f40a3'} /> : null}
-      {data.album ? (
-        <Fragment>
-          <AlbumInfo
-            {...data.album}
-            getLinks={getLinks}
-            downloadAll={downloadAll}
-            hasGottenLinks={data.album.song[0].url ? true : false}
-          />
-          <SongList
-            getLinks={getLinks}
-            song={data.album.song}
-            downloadOne={downloadOne}
-          />
-        </Fragment>
-      ) : (
-        <Fragment>
-          <AlbumInfo
-            {...data.song.album}
-            getLinks={getLinks}
-            downloadAll={downloadAll}
-            hasGottenLinks={data.song.album.song[0].url ? true : false}
-          />
-          <SongList
-            getLinks={getLinks}
-            downloadOne={downloadOne}
-            highlightID={data.song.id}
-            song={data.song.album.song}
-          />
-        </Fragment>
-      )}
+    <div>
+      <Title title={data.album.name} />
+      <div
+        css={{
+          display: 'block',
+          [mq[2]]: {
+            display: 'flex',
+            justifyContent: 'center',
+          },
+        }}
+      >
+        {isLoading ? <Loading background={'#0f2f40a3'} /> : null}
+        {data.album ? (
+          <Fragment>
+            <AlbumInfo
+              {...data.album}
+              getLinks={getLinks}
+              downloadAll={downloadAll}
+              hasGottenLinks={data.album.song[0].url ? true : false}
+            />
+            <SongList
+              getLinks={getLinks}
+              song={data.album.song}
+              downloadOne={downloadOne}
+            />
+          </Fragment>
+        ) : (
+          <Fragment>
+            <AlbumInfo
+              {...data.song.album}
+              getLinks={getLinks}
+              downloadAll={downloadAll}
+              hasGottenLinks={data.song.album.song[0].url ? true : false}
+            />
+            <SongList
+              getLinks={getLinks}
+              downloadOne={downloadOne}
+              highlightID={data.song.id}
+              song={data.song.album.song}
+            />
+          </Fragment>
+        )}
+      </div>
     </div>
   );
 };
