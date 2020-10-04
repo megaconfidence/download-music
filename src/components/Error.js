@@ -5,7 +5,7 @@ const Error = ({ error }) => {
   console.log(error);
   return (
     <div
-      css={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
+      css={{marginTop: '20px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}
     >
       <svg
         fill='#8899a6'

@@ -37,12 +37,9 @@ const SearchBar = ({ history }) => {
         background: '#253341',
         display: 'inline-flex',
         borderRadius: '9999px',
-        width: 'calc(100% - 0)',
         justifyContent: 'space-between',
+        width: '20rem',
         [mq[1]]: {
-          width: '30rem',
-        },
-        '@media  ( max-width :  780px )': {
           width: '40rem',
         },
         border: `2px solid ${isFocused ? focusColor : 'transparent'}`,
@@ -67,7 +64,7 @@ const SearchBar = ({ history }) => {
           ref={inputElement}
           css={{
             color: '#fff',
-            height: '3rem',
+            height: '40px',
             border: 'unset',
             background: 'unset',
             '@media  ( max-width :  420px )': {

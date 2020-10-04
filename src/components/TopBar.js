@@ -2,6 +2,7 @@
 import { jsx } from '@emotion/core';
 import SearchBar from './SearchBar';
 import { withRouter } from 'react-router';
+import mq from './mq';
 
 const ClearFix = () => (
   <div
@@ -18,9 +19,11 @@ const TopBar = ({ location: { pathname }, history }) => {
   return (
     <div
       css={{
+        top: '0',
         display: 'flex',
-        padding: '1rem',
+        padding: '10px',
         alignItems: 'center',
+        position: 'relative',
         justifyContent: 'space-between',
         borderBottom: '1px solid #38444d',
       }}
@@ -29,9 +32,14 @@ const TopBar = ({ location: { pathname }, history }) => {
         <div
           css={{
             padding: '10px',
+            marginLeft: '-10px',
             borderRadius: '9999px',
-            '&:hover': {
-              backgroundColor: 'rgba(29, 161, 242, 0.1)',
+            [mq[1]]: {
+              [mq[2]]: {},
+              marginLeft: 'none',
+              '&:hover': {
+                backgroundColor: 'rgba(29, 161, 242, 0.1)',
+              },
             },
           }}
           onClick={() => {

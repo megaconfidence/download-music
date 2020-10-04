@@ -2,6 +2,7 @@
 import Cat from './pages/Cat';
 import Home from './pages/Home';
 import mq from './components/mq';
+import Genre from './pages/Genre';
 import Album from './pages/Album';
 import Nav from './components/Nav';
 import Artist from './pages/Artist';
@@ -9,11 +10,12 @@ import Search from './pages/Search';
 import { jsx } from '@emotion/core';
 import CatPage from './pages/CatPage';
 import TopBar from './components/TopBar';
-import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
-import Genre from './pages/Genre';
 import GenrePage from './pages/GenrePage';
+import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
+import { useState } from 'react';
 
 function App() {
+  const [height, setHeight] = useState(window.innerHeight);
   return (
     <Router>
       <div>
@@ -24,12 +26,12 @@ function App() {
             width: '100vw',
             overflowY: 'hidden',
             position: 'relative',
-            height: 'calc(100vh - 87px)',
+            height: 'calc(100vh - 67px)',
             transform: 'translateX(-50%)',
-            borderRight: '1px solid #38444d',
             [mq[2]]: {
               maxWidth: '80vw',
               left: 'calc(50% - 170px)',
+              borderRight: '1px solid #38444d',
               transform: 'translateX(calc(-50% + 85px))',
             },
             [mq[3]]: {
@@ -37,19 +39,22 @@ function App() {
             },
           }}
         >
-          <Nav />
+          <Nav height={height} />
           <div
             css={{
               padding: '10px',
               overflowY: 'auto',
               position: 'absolute',
               width: 'calc(100% - 20px)',
-              height: 'calc(100vh - 87px)',
+              height: 'calc(100vh - 67px)',
               [mq[2]]: {
                 left: '150px',
                 width: 'calc(100% - 170px)',
                 padding: '20px 0 0 20px',
               },
+            }}
+            onScroll={() => {
+              setHeight(window.innerHeight);
             }}
           >
             <div

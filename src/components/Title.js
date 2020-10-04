@@ -1,18 +1,21 @@
 /**  @jsx jsx  */
 import { jsx } from '@emotion/core';
+import mq from './mq';
 
-const Title = ({title = ''}) => {
+const Title = ({ title = '' }) => {
   return (
     <div
       css={{
         fontSize: '1.5rem',
         fontStyle: 'italic',
-        marginLeft: '-20px',
-        marginRight: '-20px',
-        marginBottom: '20px',
-        padding: '0 20px 20px',
+        padding: '0 0 10px 10px',
         textTransform: 'capitalize',
         borderBottom: '1px solid #38444d',
+        margin: '0 -10px 20px',
+        [mq[2]]: {
+          padding: '0 0 20px 20px',
+          margin: '0 -20px 20px',
+        },
       }}
     >
       {title}

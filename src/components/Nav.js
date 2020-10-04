@@ -3,26 +3,28 @@ import { jsx } from '@emotion/core';
 import { NavLink, withRouter } from 'react-router-dom';
 import mq from './mq';
 
-const Nav = ({ location: { pathname } }) => {
+const Nav = ({ location: { pathname }, height }) => {
   const activeStyle = {
     color: 'rgb(29, 161, 242)',
   };
+  console.log(height)
 
   return (
     <nav
       css={{
-        bottom: '0',
-        position: 'absolute',
-        borderTop: '1px solid #38444d',
-        width: '100vw',
-        backgroundColor: '#15202b',
         zIndex: '10',
+        width: '100vw',
+        position: 'absolute',
+        padding: '10px 0 500px',
+        backgroundColor: '#15202b',
+        borderTop: '1px solid #38444d',
+        top: `calc(${height}px - ${67+65}px)`,
         [mq[2]]: {
           top: '0',
           width: '150px',
           height: '100vh',
           borderTop: 'none',
-          paddingTop: '50px',
+          padding: '50px 0 0',
           borderRight: '1px solid #38444d',
         },
       }}
@@ -37,26 +39,33 @@ const Nav = ({ location: { pathname } }) => {
             display: 'block',
           },
           li: {
+            padding: '10px',
+            outline: 'none',
             fontSize: '1.2rem',
+            userSelect: 'none',
             width: 'fit-content',
             alignItems: 'center',
             listStyleType: 'none',
             borderRadius: '9999px',
             transitionDuration: '0.2s',
-            padding: '10px 15px 10px 10px',
+            WebkitTouchCallout: 'none',
             transitionProperty: 'background-color',
+            WebkitTapHighlightColor: 'transparent',
             a: {
               all: 'unset',
               display: 'flex',
             },
             svg: {
-              marginRight: '20px',
+              [mq[2]]: {
+                marginRight: '20px',
+              },
               fill: '#fff',
             },
             span: {
               display: 'none',
               [mq[2]]: {
                 display: 'block',
+                marginRight: '5px',
               },
             },
             ':hover': {
