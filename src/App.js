@@ -18,12 +18,18 @@ function App() {
   const [height, setHeight] = useState(window.innerHeight);
   return (
     <Router>
-      <div>
+      <div
+        css={{
+          position: 'fixed',
+          overflowY: 'hidden',
+        }}
+      >
         <TopBar />
         <div
           css={{
             left: '50%',
             width: '100vw',
+
             overflowY: 'hidden',
             position: 'relative',
             height: 'calc(100vh - 67px)',
@@ -59,7 +65,7 @@ function App() {
           >
             <div
               css={{
-                marginBottom: '5rem',
+                marginBottom: '17rem',
                 position: 'relative',
                 [mq[2]]: {
                   marginRight: '20px',
