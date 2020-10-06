@@ -34,6 +34,9 @@ const Cat = ({ location: { pathname } }) => {
                 ':hover': {
                   color: 'rgb(29, 161, 242)',
                 },
+                ':visited': {
+                  color: '#fff',
+                },
               }}
               key={i}
               to={`${pathname}/${i}`}

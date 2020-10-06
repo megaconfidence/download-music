@@ -31,7 +31,7 @@ const Genre = ({ history, location: { search } }) => {
 
   return (
     <div>
-      <Title title='genre'/>
+      <Title title='genre' />
       <div
         css={{
           display: 'grid',
@@ -55,6 +55,9 @@ const Genre = ({ history, location: { search } }) => {
               textDecoration: 'underline',
               ':hover': {
                 color: 'rgb(29, 161, 242)',
+              },
+              ':visited': {
+                color: '#fff',
               },
             }}
             key={k}

@@ -20,8 +20,16 @@ function App() {
     <Router>
       <div
         css={{
+          width: '100vw',
+          height: '100vh',
           position: 'fixed',
           overflowY: 'hidden',
+          [mq[2]]: {
+            width: 'initial',
+            height: 'initial',
+            position: 'initial',
+            overflowY: 'initial',
+          },
         }}
       >
         <TopBar />
@@ -29,7 +37,6 @@ function App() {
           css={{
             left: '50%',
             width: '100vw',
-
             overflowY: 'hidden',
             position: 'relative',
             height: 'calc(100vh - 67px)',
@@ -65,7 +72,7 @@ function App() {
           >
             <div
               css={{
-                marginBottom: '17rem',
+                marginBottom: '10rem',
                 position: 'relative',
                 [mq[2]]: {
                   marginRight: '20px',
