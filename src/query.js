@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
 
-export const GET_ALBUMS = gql`
+export const GET_HOME = gql`
   query GetAlbums($input: PageInput!) {
     albums(input: $input) {
       id
@@ -14,6 +14,12 @@ export const GET_ALBUMS = gql`
       genre {
         name
       }
+    }
+    size {
+      album
+      artist
+      song
+      genre
     }
   }
 `;

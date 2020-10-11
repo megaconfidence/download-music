@@ -21,7 +21,9 @@ code {
 ::-moz-focus-inner {
   border: 0;
 }
-
+a:visited {
+  color: inherit;
+}
 svg {
   width: 24px;
   height: 24px;
