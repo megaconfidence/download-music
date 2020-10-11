@@ -7,23 +7,22 @@ const DownloadBtn = ({ callback, highlight }) => (
     className='single_download_btn'
     css={{
       cursor: 'pointer',
-      margin: '-10px 0 0 10px',
+      margin: '0 0 0 10px',
     }}
   >
     <svg
-      viewBox='0 0 24 20'
+      height='512'
+      viewBox='0 0 512 512'
+      width='512'
+      xmlns='http://www.w3.org/2000/svg'
       css={{
         pointerEvents: 'none',
         fill: highlight ? '#15202b' : 'rgb(29, 161, 242)',
       }}
     >
-      <g>
-        <path
-          d='M17.53 7.47l-5-5c-.293-.293-.768-.293-1.06 0l-5 5c-.294.293-.294.768 0 1.06s.767.294 1.06 0l3.72-3.72V15c0 .414.336.75.75.75s.75-.336.75-.75V4.81l3.72 3.72c.146.147.338.22.53.22s.384-.072.53-.22c.293-.293.293-.767 0-1.06z'
-          transform='scale (1, -1)'
-          transform-origin='center'
-        ></path>
-        <path d='M19.708 21.944H4.292C3.028 21.944 2 20.916 2 19.652V14c0-.414.336-.75.75-.75s.75.336.75.75v5.652c0 .437.355.792.792.792h15.416c.437 0 .792-.355.792-.792V14c0-.414.336-.75.75-.75s.75.336.75.75v5.652c0 1.264-1.028 2.292-2.292 2.292z'></path>
+      <g id='Solid'>
+        <path d='m239.029 384.97a24 24 0 0 0 33.942 0l90.509-90.509a24 24 0 0 0 0-33.941 24 24 0 0 0 -33.941 0l-49.539 49.539v-262.059a24 24 0 0 0 -48 0v262.059l-49.539-49.539a24 24 0 0 0 -33.941 0 24 24 0 0 0 0 33.941z' />
+        <path d='m464 232a24 24 0 0 0 -24 24v184h-368v-184a24 24 0 0 0 -48 0v192a40 40 0 0 0 40 40h384a40 40 0 0 0 40-40v-192a24 24 0 0 0 -24-24z' />
       </g>
     </svg>
   </span>
@@ -74,9 +73,7 @@ const SongItem = ({
           {name}
         </div>
         {!simple ? (
-          <div
-           css={{ display: 'flex', alignItems: 'center' }}
-          >
+          <div css={{ display: 'flex', alignItems: 'center' }}>
             <div>
               <time>{duration}</time>
             </div>
