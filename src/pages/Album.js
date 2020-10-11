@@ -40,7 +40,10 @@ const Album = ({ location: { pathname } }) => {
       const links = await client.query({
         query: GET_LINKS,
         variables: {
-          url: info.url,
+          input: {
+            id: info.id,
+            url: info.url,
+          },
         },
       });
 

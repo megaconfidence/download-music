@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
 export const GET_HOME = gql`
-  query GetAlbums($input: PageInput!) {
-    albums(input: $input) {
+  query GetHome {
+    topDownloads {
       id
       url
       name
@@ -121,8 +121,8 @@ export const GET_ALBUM = gql`
 `;
 
 export const GET_LINKS = gql`
-  query GetLinks($url: String!) {
-    songLinks(url: $url) {
+  query GetLinks($input: LinkInput!) {
+    songLinks(input: $input) {
       url
       playId
     }

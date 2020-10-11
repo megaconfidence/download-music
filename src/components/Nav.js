@@ -7,7 +7,6 @@ const Nav = ({ location: { pathname }, height }) => {
   const activeStyle = {
     color: 'rgb(29, 161, 242)',
   };
-  console.log(height)
 
   return (
     <nav
