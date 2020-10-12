@@ -25,7 +25,16 @@ const ArtistCard = ({ id = '', name = '', image = '' }) => {
           borderRadius: '100%',
           backgroundSize: 'cover',
           backgroundRepeat: 'no-repeat',
-          backgroundImage: `url(${image})`,
+          backgroundImage: `url(${image
+            .replace(
+              'http://cdn-41.myzcloud.pro',
+              'https://cdn-41-a.myzcloud.me'
+            )
+            .replace('http://cdn-39.myzcloud.pro', 'https://cdn-39.myzcloud.me')
+            .replace(
+              'http://cdn-37.myzcloud.pro',
+              'https://cdn-37.myzcloud.me'
+            )})`,
         }}
       ></div>
       <div
