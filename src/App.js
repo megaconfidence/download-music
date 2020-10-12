@@ -72,7 +72,7 @@ function App() {
           >
             <div
               css={{
-                marginBottom: '10rem',
+                marginBottom: '15rem',
                 position: 'relative',
                 [mq[2]]: {
                   marginRight: '20px',
