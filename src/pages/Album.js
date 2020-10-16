@@ -115,7 +115,7 @@ const Album = ({ location: { pathname } }) => {
               {...data.album}
               getLinks={getLinks}
               downloadAll={downloadAll}
-              hasGottenLinks={data.album.song[0].url ? true : false}
+              hasGottenLinks={ data.album.song[0] && data.album.song[0].url ? true : false}
             />
             <SongList
               getLinks={getLinks}
@@ -129,7 +129,7 @@ const Album = ({ location: { pathname } }) => {
               {...data.song.album}
               getLinks={getLinks}
               downloadAll={downloadAll}
-              hasGottenLinks={data.song.album.song[0].url ? true : false}
+              hasGottenLinks={data.song.album.song[0] && data.song.album.song[0].url ? true : false}
             />
             <SongList
               getLinks={getLinks}

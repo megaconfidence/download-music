@@ -33,7 +33,9 @@ const SongItem = ({
   url,
   playId,
   duration,
+  artist = [],
   simple = false,
+  withAlbum = false,
   getLinks = () => {},
   downloadOne = () => {},
   highlight = false,
@@ -55,9 +57,9 @@ const SongItem = ({
     >
       <div
         css={{
-          height: '3rem',
           display: 'flex',
           alignItems: 'center',
+          height: withAlbum ? '5rem' : '3rem',
         }}
       >
         <div
@@ -70,7 +72,12 @@ const SongItem = ({
             textTransform: 'capitalize',
           }}
         >
-          {name}
+          <div>{name}</div>
+          {withAlbum ? (
+            <div css={{ marginTop: '0.5rem' }}>
+              by {artist.map((a) => a.name).join(' / ')}
+            </div>
+          ) : null}
         </div>
         {!simple ? (
           <div css={{ display: 'flex', alignItems: 'center' }}>

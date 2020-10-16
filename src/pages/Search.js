@@ -25,13 +25,15 @@ const Search = ({ location }) => {
 
   return (
     <div>
-        <Title title=
-        {!data.searchArtist.length &&
-        !data.searchAlbum.length &&
-        !data.searchSong.length
-          ? `No results for "${query}"`
-          : `Results for "${query}"`}
-          />
+      <Title
+        title={
+          !data.searchArtist.length &&
+          !data.searchAlbum.length &&
+          !data.searchSong.length
+            ? `No results for "${query}"`
+            : `Results for "${query}"`
+        }
+      />
       {data.searchArtist.length ? (
         <div
           css={{
@@ -138,7 +140,7 @@ const Search = ({ location }) => {
                 key={k}
                 to={`/song/${s.id}`}
               >
-                <SongItem {...s} simple />
+                <SongItem {...s} simple withAlbum />
               </Link>
             ))}
           </div>
